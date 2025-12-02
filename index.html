@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahabatku Delivery - Solusi Pengiriman Modern</title>
+    <title>Sahabatku Delivery - Jawaban Pengiriman Modern</title>
     
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
@@ -84,6 +84,7 @@
         .animate { opacity: 1 !important; transform: translateY(0) !important; transition: opacity 1s ease-out, transform 1s ease-out; }
         .fade-init { opacity: 0; transform: translateY(20px); }
         h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-secondary) !important; }
+        h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; } /* Menambahkan h4 style */
         .btn-primary { background-color: var(--color-accent); border-color: var(--color-accent); border-radius: 8px; transition: all 0.3s; font-weight: 600; text-transform: uppercase; }
         .btn-primary:hover { background-color: #E5451A; border-color: #E5451A; }
         
@@ -455,7 +456,7 @@
             </div>
             
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20belanja%20bulanan." target="_blank" class="text-decoration-none">
+                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20belanja." target="_blank" class="text-decoration-none">
                     <div class="service-card card-shop fade-init" style="animation-delay: 0.4s;">
                         <div class="icon-wrapper"><i class="fas fa-shopping-cart"></i></div>
                         <h5>Sahabat Shop</h5>
@@ -509,6 +510,28 @@
             </div>
         </div>
         
+        <div class="row text-center mt-5 mb-5 fade-init" style="animation-delay: 1s;">
+            <div class="col-12">
+                <h4 class="mb-3 fw-bold" style="color: var(--color-food);">Cek Mitra Food Kami</h4>
+                <a href="https://sahabatkugroup.github.io/sahabatkufoodapp/" target="_blank" 
+                   class="btn fw-bold text-white btn-sm mb-4" 
+                   style="background-color: var(--color-food); border-color: var(--color-food); border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(255, 152, 0, 0.5);">
+                    <i class="fas fa-store me-2"></i> Kunjungi Sahabatku Food App
+                </a>
+                
+                <h5 class="mt-4 mb-3 fw-bold text-muted" style="font-family: 'Montserrat', sans-serif;">Sahabatku Food</h5>
+                <div class="iframe-container mx-auto" style="max-width: 600px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid #ddd;">
+                    <iframe src="https://sahabatkugroup.github.io/sahabatkufoodapp/" 
+                            width="100%" 
+                            height="500px" 
+                            style="border: none;"
+                            title="Preview Sahabatku Food App">
+                        Peringatan: Browser Anda tidak mendukung iframe, atau konten diblokir. Silakan klik tombol di atas untuk mengunjungi.
+                    </iframe>
+                </div>
+                <p class="small text-muted mt-2">Pratinjau mungkin tidak memuat jika diblokir oleh kebijakan keamanan browser atau situs tujuan.</p>
+            </div>
+        </div>
         <h2 class="text-center mt-5 fade-init">APA KATA PENGGUNA KAMI?</h2>
         <div id="testimonialCarousel" class="carousel slide py-4" data-bs-ride="carousel">
             <div class="carousel-inner" id="testimonial-container">
