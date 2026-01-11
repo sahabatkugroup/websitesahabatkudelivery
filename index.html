@@ -3,882 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahabatku Delivery - Jawaban Pengiriman Modern</title>
+    <title>Sahabatku Group | Ekosistem Solusi Elit & Terpercaya</title>
     
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        /* TEMA BIRU CERAH (#0BA6DF) & WARNA LAYANAN KHUSUS */
         :root {
-            --color-primary: #0BA6DF; /* Biru Utama */
-            --color-secondary: #0A87B8; /* Biru Lebih Gelap */
-            --color-accent: #FF5722; /* Oranye Kontras (Tombol CTA) */
-            --color-bg: #F5FAFF; /* Latar Belakang Sangat Cerah */
-            --color-text: #333333;
-            --color-light: #FFFFFF;
-            --shadow-light: rgba(255, 255, 255, 0.7);
-            --shadow-dark: rgba(10, 20, 30, 0.1);
-            
-            /* WARNA AKSEN UNIK UNTUK SERVICE CARD */
-            --color-ojeg: #4CAF50;    /* Hijau untuk Ojek */
-            --color-food: #FF9800;    /* Oranye untuk Food */
-            --color-send: #795548;    /* Cokelat untuk Kirim Barang */
-            --color-shop: #00BCD4;    /* Cyan untuk Belanja/Shop */
-            --color-jastip: #A0522D;  /* Cokelat Muda/Sienna untuk Jastip */
-            --color-payment: #673AB7; /* Ungu untuk Payment */
-            --color-service: #607D8B; /* Biru Keabu-abuan untuk Service */
-            --color-creative: #FFC107; /* Kuning/Emas untuk Sahabat Kreatif */
+            --primary: #0BA6DF;
+            --primary-dark: #0888B5;
+            --dark-deep: #0B0F19;
+            --slate: #64748B;
+            --light-bg: #F8FAFC;
         }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-deep);
             overflow-x: hidden;
         }
 
-        /* Navbar Styles */
-        .navbar { background: var(--color-primary); box-shadow: 0 4px 15px rgba(0,0,0,0.25); }
-        .navbar-brand, .nav-link {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #FFFFFF !important;
+        /* --- NAVIGATION --- */
+        .navbar { padding: 25px 0; transition: 0.4s ease; z-index: 1050; }
+        .navbar.scrolled {
+            padding: 15px 0; background: rgba(255,255,255,0.98) !important;
+            backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
-        .dropdown-menu { border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; min-width: 200px; }
-        .dropdown-item { font-family: 'Roboto', sans-serif; font-weight: 500; padding: 8px 15px; transition: background-color 0.3s, color 0.3s; color: var(--color-text); display: flex; align-items: center; }
-        .dropdown-item:hover { background-color: var(--color-primary); color: #FFFFFF; }
-        .dropdown-item:hover i { color: #FFFFFF !important; }
-        .dropdown-item i { width: 25px; text-align: center; margin-right: 10px; transition: color 0.3s; }
+        .navbar-brand { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--primary) !important; }
+        .nav-link { font-weight: 600; color: var(--dark-deep) !important; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary) !important; }
+        .social-nav a { color: var(--dark-deep); margin-left: 15px; font-size: 1.2rem; transition: 0.3s; display: inline-block; }
+        .social-nav a:hover { color: var(--primary); transform: translateY(-3px); }
 
-        /* HERO SECTION */
-        .hero-section {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-            min-height: 550px; display: flex; align-items: center; color: #FFFFFF;
-            position: relative; overflow: hidden; border-bottom-left-radius: 40px; 
-            border-bottom-right-radius: 40px; z-index: 1; padding-top: 50px; 
+        /* --- HERO --- */
+        .hero {
+            padding: 190px 0 100px;
+            background: radial-gradient(circle at 90% 15%, rgba(11, 166, 223, 0.12), transparent 45%);
         }
-        .hero-content { position: relative; z-index: 2; padding-bottom: 80px; }
-        .hero-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 3.5rem; line-height: 1.2; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); }
-        .hero-subtitle { font-size: 1.3rem; margin-top: 15px; max-width: 600px; text-shadow: 0 2px 5px rgba(0,0,0,0.2); opacity: 0; transform: translateY(20px); }
-        .hero-section .btn-primary { 
-            margin-top: 30px; padding: 15px 40px; font-size: 1.1rem; border-radius: 50px;
-            transition: all 0.4s ease-in-out; box-shadow: 0 8px 20px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px);
-        }
-        .hero-section .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.4); }
-        
-        /* WAVE ANIMATION */
-        .waves { position: absolute; bottom: 0; left: 0; width: 100%; height: 100px; overflow: hidden; z-index: 1; }
-        .parallax > use { animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite; }
-        .parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
-        .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
-        .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
-        .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
-        @keyframes move-forever { 0% { transform: translate3d(-90px,0,0); } 100% { transform: translate3d(85px,0,0); } }
-
-        /* ANIMAASI & JUDUL UMUM */
-        .animate { opacity: 1 !important; transform: translateY(0) !important; transition: opacity 1s ease-out, transform 1s ease-out; }
-        .fade-init { opacity: 0; transform: translateY(20px); }
-        h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-secondary) !important; }
-        h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; } /* Menambahkan h4 style */
-        .btn-primary { background-color: var(--color-accent); border-color: var(--color-accent); border-radius: 8px; transition: all 0.3s; font-weight: 600; text-transform: uppercase; }
-        .btn-primary:hover { background-color: #E5451A; border-color: #E5451A; }
-        
-        /* =================================================== */
-        /* === MODERN SERVICE CARD STYLES (KOTAK LAYANAN) === */
-        /* =================================================== */
-
-        .service-card {
-            background: #FFFFFF;
-            padding: 30px 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 0, 0, 0.05); 
-            box-shadow: 
-                0 5px 15px var(--shadow-dark), 
-                0 1px 1px var(--shadow-light) inset; 
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            height: 100%;
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            text-align: center;
-        }
-        .service-card:hover { transform: translateY(-8px); }
-
-        .icon-wrapper {
-            width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .icon-wrapper i { font-size: 2.5rem; color: #FFFFFF !important; }
-        
-        .service-card h5 {
-            font-family: 'Montserrat', sans-serif; font-weight: 700;
-            margin-top: 10px; margin-bottom: 5px; transition: color 0.3s;
+        .hero-title {
+            font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 7vw, 4.8rem);
+            font-weight: 900; line-height: 0.95; letter-spacing: -3px;
         }
 
-        .service-card p {
-            font-size: 0.9rem; color: #666; flex-grow: 1; min-height: 40px; 
+        /* --- WHY CHOOSE US --- */
+        .reason-card {
+            background: #fff; border: 1px solid #F1F5F9; border-radius: 30px; padding: 40px;
+            transition: 0.4s; height: 100%;
+        }
+        .reason-card:hover { border-color: var(--primary); background: #f0f9ff; transform: translateY(-5px); }
+        .reason-icon {
+            width: 60px; height: 60px; background: var(--primary); color: white;
+            border-radius: 18px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin-bottom: 25px;
         }
 
-        .service-card .btn-primary {
-            margin-top: auto; padding: 8px 20px; font-size: 0.85rem; border-radius: 50px;
+        /* --- ELITE PROFILE --- */
+        .profile-container {
+            background: var(--dark-deep); color: white; border-radius: 50px;
+            padding: 80px 60px; position: relative; overflow: hidden;
         }
-        
-        /* Service Card Custom Colors & Hover Effects */
-        .card-ojeg .icon-wrapper { background: linear-gradient(45deg, var(--color-ojeg), #388E3C); }
-        .card-ojeg h5 { color: var(--color-ojeg); }
-        .card-ojeg:hover { box-shadow: 0 20px 40px rgba(76, 175, 80, 0.3); border-color: var(--color-ojeg); }
-
-        .card-food .icon-wrapper { background: linear-gradient(45deg, var(--color-food), #F57C00); }
-        .card-food h5 { color: var(--color-food); }
-        .card-food:hover { box-shadow: 0 20px 40px rgba(255, 152, 0, 0.3); border-color: var(--color-food); }
-
-        .card-send .icon-wrapper { background: linear-gradient(45deg, var(--color-send), #5D4037); }
-        .card-send h5 { color: var(--color-send); }
-        .card-send:hover { box-shadow: 0 20px 40px rgba(121, 85, 72, 0.3); border-color: var(--color-send); }
-
-        .card-shop .icon-wrapper { background: linear-gradient(45deg, var(--color-shop), #0097A7); }
-        .card-shop h5 { color: var(--color-shop); }
-        .card-shop:hover { box-shadow: 0 20px 40px rgba(0, 188, 212, 0.3); border-color: var(--color-shop); }
-        
-        .card-jastip .icon-wrapper { background: linear-gradient(45deg, var(--color-jastip), #8B4513); }
-        .card-jastip h5 { color: var(--color-jastip); }
-        .card-jastip:hover { box-shadow: 0 20px 40px rgba(160, 82, 45, 0.3); border-color: var(--color-jastip); }
-
-        .card-payment .icon-wrapper { background: linear-gradient(45deg, var(--color-payment), #512DA8); }
-        .card-payment h5 { color: var(--color-payment); }
-        .card-payment:hover { box-shadow: 0 20px 40px rgba(103, 58, 183, 0.3); border-color: var(--color-payment); }
-
-        .card-service .icon-wrapper { background: linear-gradient(45deg, var(--color-service), #455A64); }
-        .card-service h5 { color: var(--color-service); }
-        .card-service:hover { box-shadow: 0 20px 40px rgba(96, 125, 139, 0.3); border-color: var(--color-service); }
-        
-        /* NEW SERVICE: Sahabat Kreatif */
-        .card-creative .icon-wrapper { background: linear-gradient(45deg, var(--color-creative), #FFB300); }
-        .card-creative h5 { color: var(--color-creative); }
-        .card-creative:hover { box-shadow: 0 20px 40px rgba(255, 193, 7, 0.3); border-color: var(--color-creative); }
-        
-        /* Ikon Sosial Media & Footer */
-        .contact-item i { transition: transform 0.3s; }
-        .contact-item:hover i { transform: scale(1.15); }
-        .fa-whatsapp { color: #25D366; }
-        .fa-facebook-f { color: #1877F2; }
-        .fa-tiktok { color: #000000; }
-        .fa-instagram { 
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 4em; 
-        }
-        .footer { 
-            background-color: var(--color-secondary); 
-            color: #E0F7FA; 
-            padding: 30px 0; 
-            text-align: center; 
-            margin-top: 50px;
-            border-top: 5px solid var(--color-accent); /* Aksen garis Oranye (Tambahan) */
-        }
-        
-        /* ================================================= */
-        /* === TENTANG KAMI (MODERN DENGAN GAMBAR LOGO) === */
-        /* ================================================= */
-        
-        .about-image-wrapper {
-            background-color: var(--color-primary); 
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden; 
-            min-height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        /* PERUBAHAN UNTUK GAMBAR FULL DAN TIDAK TERPOTONG */
-        .about-image {
-            width: 100%;
-            height: 100%; /* Mengisi 100% tinggi wrapper */
-            display: block;
-            object-fit: contain; /* Memastikan gambar tidak terpotong */
-        }
-        
-        .about-card-icon { 
-            color: var(--color-primary); 
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: var(--color-light);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        .about-card-item {
-            padding: 25px;
-            background: var(--color-light);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
-            height: 100%;
-        }
-        .about-card-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        /* Style untuk Sahabat Kreatif Detail Card */
-        .creative-detail-card {
-            background: linear-gradient(135deg, var(--color-creative) 0%, #FFB300 100%);
-            color: #333333; /* Dibuat gelap agar kontras dengan latar kuning */
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-top: 40px; 
-            transition: all 0.3s;
-            border: none;
-        }
-        .creative-detail-card h4 {
-            color: #FFFFFF; /* Warna putih agar lebih menonjol */
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            margin-bottom: 15px;
-        }
-        .creative-detail-card p.fw-light {
-            color: #333333 !important; /* Dibuat gelap agar terbaca */
-            font-weight: 700 !important;
-        }
-        .creative-detail-card ul {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-        .creative-detail-card ul li {
-            margin-bottom: 8px;
-            font-size: 1rem;
-            display: flex;
-            align-items: flex-start;
-            color: var(--color-text);
-        }
-        .creative-detail-card ul li i {
-            margin-right: 10px;
-            color: var(--color-secondary); 
-            font-size: 1.2em;
-            margin-top: 4px; 
-        }
-        .creative-detail-card a.btn-light {
-            color: var(--color-creative) !important;
-            background-color: #FFFFFF;
-            font-weight: 700;
-            transition: transform 0.3s;
-        }
-        .creative-detail-card a.btn-light:hover {
-            transform: scale(1.05);
+        .profile-container::after {
+            content: ''; position: absolute; bottom: -50px; left: -50px;
+            width: 300px; height: 300px; background: var(--primary);
+            filter: blur(150px); opacity: 0.2;
         }
 
-        /* ================================================= */
-        /* === TESTIMONIAL (NEUMORPHISM) === */
-        /* ================================================= */
-        .testimonial-card-wrapper { width: 33.33%; padding: 0 15px; }
-        .carousel-item-custom { display: flex; justify-content: center; padding: 0 50px; }
-        
-        .testimonial-card {
-            background: var(--color-bg); /* Mengikuti warna background body */
-            padding: 25px;
-            border-radius: 20px;
-            margin: 10px;
-            /* Neumorphism Shadow Effect */
-            box-shadow: 
-                8px 8px 16px rgba(174, 190, 207, 0.6), /* Bayangan gelap luar */
-                -8px -8px 16px var(--shadow-light); /* Bayangan terang luar (Highlight) */
-            border: none;
-            height: 100%;
-            transition: all 0.3s;
-            text-align: left; /* Mengatur rata kiri konten kartu */
+        /* --- BENTO SERVICE GRID --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px; }
+        .bento-card {
+            background: white; border-radius: 35px; padding: 40px;
+            text-decoration: none !important; color: inherit !important;
+            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            border: 1px solid #f1f5f9; display: flex; flex-direction: column; justify-content: space-between;
         }
-        .testimonial-card:hover {
-            box-shadow: 
-                4px 4px 8px rgba(174, 190, 207, 0.6), 
-                -4px -4px 8px var(--shadow-light); 
-            transform: scale(1.02);
+        .bento-card:hover { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 40px 80px -15px rgba(11, 166, 223, 0.2); }
+        .bento-card i { font-size: 2.4rem; color: var(--primary); margin-bottom: 25px; }
+        .span-8 { grid-column: span 8; background: #f0f9ff; border: none; }
+        .span-4 { grid-column: span 4; }
+
+        /* --- TESTIMONI --- */
+        .testi-section { padding: 90px 0 30px; background: #fcfcfc; }
+        .swiper-container { cursor: pointer; padding: 20px 0; }
+        .testi-card {
+            background: white; padding: 35px; border-radius: 30px;
+            width: 360px; border: 1px solid #F1F5F9; transition: 0.4s;
         }
-        .testimonial-user-avatar {
-            width: 50px;
-            height: 50px;
-            background-color: var(--color-primary);
-            color: var(--color-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-right: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .testi-card:hover { border-color: var(--primary); }
+
+        /* --- CAREER --- */
+        .career-card {
+            background: linear-gradient(135deg, var(--dark-deep) 0%, #1e293b 100%);
+            border-radius: 50px; padding: 80px; color: white;
+            position: relative; overflow: hidden; margin-top: 10px;
         }
-        .testimonial-message {
-            font-style: italic;
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--color-accent); /* Aksen garis oranye */
-            padding-left: 10px;
+
+        /* --- FLOATING WA --- */
+        .wa-float {
+            position: fixed; bottom: 35px; right: 35px;
+            background: #25D366; color: white; width: 65px; height: 65px;
+            border-radius: 22px; display: flex; align-items: center; justify-content: center;
+            font-size: 32px; z-index: 1000; box-shadow: 0 15px 35px rgba(37,211,102,0.3);
+            transition: 0.3s;
         }
-        .testimonial-rating .fa-star, .testimonial-rating .far-star { color: #FFD700; }
-        
-        /* Badge Customization (Tetap sama) */
-        .badge { font-weight: 500; padding: 0.4em 0.8em; border-radius: 50px; font-size: 0.75rem; }
-        .badge.bg-primary { background-color: var(--color-secondary) !important; }
-        .badge.bg-success { background-color: var(--color-ojeg) !important; }
-        .badge.bg-danger { background-color: var(--color-accent) !important; }
-        .badge.bg-secondary { background-color: #9E9E9E !important; }
-        
-        /* Responsive (Disesuaikan) */
-        @media (max-width: 992px) { 
-            .hero-section { min-height: 450px; border-radius: 0; padding-top: 30px; }
+        .wa-float:hover { transform: scale(1.1) rotate(10deg); color: white; }
+
+        @media (max-width: 991px) {
+            .bento-grid { display: flex; flex-direction: column; }
+            .profile-container, .career-card { padding: 45px 25px; border-radius: 35px; }
             .hero-title { font-size: 2.8rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .hero-section .btn-primary { padding: 12px 30px; font-size: 1rem; }
-            .waves { height: 70px; }
-            .service-grid .col-6 { width: 50% !important; }
-            .contact-row .col-3 { width: 25% !important; }
-            .fa-instagram { font-size: 2.5em; }
-            .contact-item i { font-size: 2.5em !important; }
-            .carousel-item-custom { padding: 0 10px; flex-wrap: wrap; }
-            .testimonial-card-wrapper { width: 100%; margin-bottom: 20px; }
-            .about-image-wrapper { min-height: 250px; padding: 10px; } 
+            .span-8, .span-4 { grid-column: span 12; }
         }
-
-        /* Styling Tambahan untuk Modal */
-        .modal-header.bg-primary { background-color: var(--color-primary) !important; }
-        .btn-close-white { filter: invert(1) grayscale(100%) brightness(200%); } /* Warna putih untuk tombol close */
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">SAHABATKU DELIVERY</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+    <a href="https://wa.me/6282219313326?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="wa-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">SAHABATKU</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#beranda">BERANDA</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tentangkami">TENTANG KAMI</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPesan" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            PESAN SEKARANG
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownPesan">
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20Ojeg." target="_blank"><i class="fas fa-motorcycle" style="color:var(--color-ojeg);"></i> Sahabat Ojeg</a></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20pesan%20makanan%20dan%20minuman." target="_blank"><i class="fas fa-utensils" style="color:var(--color-food);"></i> Sahabat Food</a></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20kirim%20barang." target="_blank"><i class="fas fa-box" style="color:var(--color-send);"></i> Sahabat Send</a></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20belanja." target="_blank"><i class="fas fa-shopping-cart" style="color:var(--color-shop);"></i> Sahabat Shop</a></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20Jastip%20barang." target="_blank"><i class="fas fa-people-carry-box" style="color:var(--color-jastip);"></i> Sahabat Jastip</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20Sahabat%20Kreatif." target="_blank"><i class="fas fa-lightbulb" style="color:var(--color-creative);"></i> Sahabat Kreatif</a></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20pembayaran." target="_blank"><i class="fas fa-credit-card" style="color:var(--color-payment);"></i> Sahabat Payment</a></li>
-                            <li><a class="dropdown-item" href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20jasa%20layanan%20lainnya." target="_blank"><i class="fas fa-tools" style="color:var(--color-service);"></i> Sahabat Service</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#lowonganModal">LOWONGAN</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#kemitraanModal">KEMITRAAN</a>
-                    </li>
+                <ul class="navbar-nav mx-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="#kenapa">Kenapa Kami?</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#profil">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#layanan">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#karir">Karir</a></li>
                 </ul>
+                <div class="social-nav d-none d-lg-flex">
+                    <a href="https://www.instagram.com/sahabatkudelivery" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@sahabatku-bisa" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://tiktok.com/@sahabatkudelivery" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/sahabatkujatibarang" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
             </div>
         </div>
     </nav>
-    
-    <section class="hero-section" id="hero">
-        <div class="container hero-content text-center text-md-start">
-            <h1 class="hero-title fade-init" style="animation-delay: 0.1s;">Layanan jasa & <br> Transportasi Lokal</h1>
-            <p class="hero-subtitle fade-init" style="animation-delay: 0.4s;">Pesan cepat melalui WhatsApp, terpercaya dan siap sedia kapanpun.</p>
-            <a href="https://wa.me/6282219313326?text=Saya%20mau%20order!" class="btn btn-primary btn-lg fade-init" style="animation-delay: 0.7s;">PESAN SEKARANG</a>
-        </div>
-        
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#F5FAFF" /> 
-            </g>
-        </svg>
-    </section>
-    
-    <section id="beranda" class="container pt-5">
-        <h2 class="text-center mb-5 fade-init">LAYANAN UTAMA KAMI</h2>
-        <div class="row service-grid justify-content-center">
-            
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20Ojeg." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-ojeg fade-init" style="animation-delay: 0.1s;">
-                        <div class="icon-wrapper"><i class="fas fa-motorcycle"></i></div>
-                        <h5>Sahabat Ojeg</h5>
-                        <p>Antar Jemput Penumpang dengan cepat, aman, dan tarif bersahabat.</p>
-                        <span class="btn btn-primary">Pesan Ojeg</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20pesan%20makanan%20dan%20minuman." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-food fade-init" style="animation-delay: 0.2s;">
-                        <div class="icon-wrapper"><i class="fas fa-utensils"></i></div>
-                        <h5>Sahabat Food</h5>
-                        <p>Pesan dan antar makanan/minuman dari restoran/warung favorit Anda.</p>
-                        <span class="btn btn-primary">Pesan Food</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20kirim%20barang." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-send fade-init" style="animation-delay: 0.3s;">
-                        <div class="icon-wrapper"><i class="fas fa-box"></i></div>
-                        <h5>Sahabat Send</h5>
-                        <p>Jasa kurir pengiriman barang/paket skala lokal dengan cepat dan terjamin.</p>
-                        <span class="btn btn-primary">Kirim Barang</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20belanja." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-shop fade-init" style="animation-delay: 0.4s;">
-                        <div class="icon-wrapper"><i class="fas fa-shopping-cart"></i></div>
-                        <h5>Sahabat Shop</h5>
-                        <p>Belanja kebutuhan harian, bulanan, atau ke pasar tanpa repot.</p>
-                        <span class="btn btn-primary">Mulai Belanja</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20Jastip%20barang." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-jastip fade-init" style="animation-delay: 0.5s;">
-                        <div class="icon-wrapper"><i class="fas fa-people-carry-box"></i></div>
-                        <h5>Sahabat Jastip</h5>
-                        <p>Jasa Titip Beli Barang dari toko atau lokasi manapun untuk Anda.</p>
-                        <span class="btn btn-primary">Jastip Barang</span>
-                    </div>
-                </a>
-            </div>
 
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20Sahabat%20Kreatif%20(jasa%20desain%2Ffollowers)." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-creative fade-init" style="animation-delay: 0.6s;">
-                        <div class="icon-wrapper"><i class="fas fa-lightbulb"></i></div>
-                        <h5>Sahabat Kreatif</h5>
-                        <p>Layanan desain, CV, photography, suntik followers/like, dan lainnya.</p>
-                        <span class="btn btn-primary">Pesan Jasa</span>
-                    </div>
-                </a>
+    <section class="hero">
+        <div class="container" data-aos="fade-up">
+            <h6 class="text-primary fw-800 mb-4">PLATFORM MULTI-PRIDE #1</h6>
+            <h1 class="hero-title mb-5">Pelayanan Modern <br><span class="text-primary">Andalan Anda.</span></h1>
+            <p class="lead text-muted w-50 d-none d-lg-block">Ekosistem terpadu yang mendefinisikan ulang cara Anda berinteraksi dengan layanan harian melalui teknologi terdepan.</p>
+        </div>
+    </section>
+
+    <section class="py-5" id="kenapa">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-900">Kenapa Harus Sahabatku?</h2>
+                <p class="text-muted">Alasan strategis mengapa ribuan pelanggan memilih layanan kami.</p>
             </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20pembayaran." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-payment fade-init" style="animation-delay: 0.7s;">
-                        <div class="icon-wrapper"><i class="fas fa-credit-card"></i></div>
-                        <h5>Sahabat Payment</h5>
-                        <p>Layanan pembayaran tagihan, isi saldo, pulsa, atau token listrik.</p>
-                        <span class="btn btn-primary">Bayar/Isi Saldo</span>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="reason-card">
+                        <div class="reason-icon"><i class="fas fa-bolt"></i></div>
+                        <h4 class="fw-800">Kecepatan Responsif</h4>
+                        <p class="text-muted mb-0">Manajemen armada cerdas memastikan kebutuhan Anda terpenuhi dalam waktu singkat tanpa kompromi kualitas.</p>
                     </div>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20mau%20jasa%20layanan%20lainnya." target="_blank" class="text-decoration-none">
-                    <div class="service-card card-service fade-init" style="animation-delay: 0.8s;">
-                        <div class="icon-wrapper"><i class="fas fa-tools"></i></div>
-                        <h5>Sahabat Service</h5>
-                        <p>Jasa layanan perbaikan, kebersihan, atau kebutuhan lokal lainnya.</p>
-                        <span class="btn btn-primary">Layanan Lain</span>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4 class="fw-800">Keamanan Berlapis</h4>
+                        <p class="text-muted mb-0">Seluruh Driver kami telah melalui proses verifikasi ketat untuk menjamin keamanan transaksi dan kenyamanan Anda.</p>
                     </div>
-                </a>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="reason-card">
+                        <div class="reason-icon"><i class="fas fa-gem"></i></div>
+                        <h4 class="fw-800">Kualitas Premium</h4>
+                        <p class="text-muted mb-0">Kami menghadirkan pengalaman layanan kelas atas yang personal dan eksklusif untuk setiap pelanggan.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="row text-center mt-5 mb-5 fade-init" style="animation-delay: 1s;">
-            <div class="col-12">
-                <h4 class="mb-3 fw-bold" style="color: var(--color-food);">Cek Mitra Food Kami</h4>
-                <a href="https://sahabatkugroup.github.io/sahabatkufoodapp/" target="_blank" 
-                   class="btn fw-bold text-white btn-sm mb-4" 
-                   style="background-color: var(--color-food); border-color: var(--color-food); border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(255, 152, 0, 0.5);">
-                    <i class="fas fa-store me-2"></i> Kunjungi Sahabatku Food App
+    </section>
+    <section class="py-5" id="profil">
+        <div class="container">
+            <div class="profile-container" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <h2 class="fw-900 display-5 mb-4">Dedikasi Untuk <br>Masa Depan Digital.</h2>
+                        <p class="opacity-75 fs-5 mb-5">Sahabatku Group bukan sekadar penyedia jasa, kami adalah mitra strategis Anda. Lahir di Jatibarang untuk memberikan standar pelayanan terbaik bagi masyarakat lokal. Kami terus berevolusi untuk menciptakan kemudahan yang bermakna setiap harinya.</p>
+                        <div class="d-flex gap-5">
+                            <div><h3 class="fw-900 mb-0">Elite</h3><small class="opacity-50">Service Standard</small></div>
+                            <div class="border-start ps-5"><h3 class="fw-900 mb-0">Trusted</h3><small class="opacity-50">Digital Partner</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block text-end">
+                        <i class="fas fa-fingerprint text-primary opacity-20" style="font-size: 15rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="layanan">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-900">Layanan Terintegrasi</h2>
+                <p class="text-muted">Satu platform elit untuk semua kebutuhan gaya hidup Anda.</p>
+            </div>
+            <div class="bento-grid">
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20pesan%20makanan%20%26%20Minuman" class="bento-card span-8" data-aos="fade-up">
+                    <i class="fas fa-utensils"></i>
+                    <div><h4>Sahabatku Food</h4><p>Pesan antar kuliner terbaik dengan standar pengiriman higienis.</p></div>
                 </a>
                 
-                <h5 class="mt-4 mb-3 fw-bold text-muted" style="font-family: 'Montserrat', sans-serif;">Sahabatku Food</h5>
-                <div class="iframe-container mx-auto" style="max-width: 600px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid #ddd;">
-                    <iframe src="https://sahabatkugroup.github.io/sahabatkufoodapp/" 
-                            width="100%" 
-                            height="500px" 
-                            style="border: none;"
-                            title="Preview Sahabatku Food App">
-                        Peringatan: Browser Anda tidak mendukung iframe, atau konten diblokir. Silakan klik tombol di atas untuk mengunjungi.
-                    </iframe>
-                </div>
-                <p class="small text-muted mt-2">Pratinjau mungkin tidak memuat jika diblokir oleh kebijakan keamanan browser atau situs tujuan.</p>
-            </div>
-        </div>
-        <h2 class="text-center mt-5 fade-init">APA KATA PENGGUNA KAMI?</h2>
-        <div id="testimonialCarousel" class="carousel slide py-4" data-bs-ride="carousel">
-            <div class="carousel-inner" id="testimonial-container">
-                <div class="carousel-item active" id="loading-message">
-                    <div class="col-12 text-center py-5">
-                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
-                        <p class="mt-2">Memuat testimoni...</p>
-                    </div>
-                </div>
-                </div>
-            
-            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-        </section>
-
-    <section id="tentangkami" class="container mt-5 pt-4 pb-5">
-        <h2 class="text-center mb-5 fade-init">TENTANG KAMI</h2>
-        
-        <div class="row align-items-center">
-            
-            <div class="col-lg-6 mb-4 mb-lg-0 fade-init" style="animation-delay: 0.1s;">
-                <div class="about-image-wrapper">
-                    <img src="https://i.imgur.com/VBmBJOq.jpeg" alt="Logo Sahabatku Delivery" class="about-image">
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <p class="lead fade-init" style="animation-delay: 0.3s;">Sahabatku Delivery adalah layanan pengantaran yang berbasis di Jatibarang, Indramayu, hadir sejak tahun 2022 dan resmi beroperasi kembali pada 1 Maret 2024. Kami hadir sebagai solusi pengiriman cepat, aman, dan terpercaya bagi masyarakat.</p>
-
-                <div class="row mt-4">
-                    <div class="col-md-6 mb-4 fade-init" style="animation-delay: 0.5s;">
-                        <div class="about-card-item">
-                            <i class="fas fa-handshake about-card-icon"></i>
-                            <h4 class="fw-bold" style="color: var(--color-secondary);">Kenapa Memilih Kami?</h4>
-                            <p class="mb-0">Kurir profesional yang direkrut melalui seleksi ketat. Kami menempatkan kepuasan pelanggan sebagai prioritas utama di setiap pengantaran.</p>
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20pesan%20Ojek" class="bento-card span-4" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-motorcycle"></i>
+                    <div><h4>Sahabatku Ojek</h4><p>Transportasi aman dengan driver profesional.</p></div>
+                </a>
+                
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Kirim%20Paket" class="bento-card span-4" data-aos="fade-up">
+                    <i class="fas fa-paper-plane"></i>
+                    <div><h4>Sahabatku Send</h4><p>Kirim paket dan dokumen instan kemana saja.</p></div>
+                </a>
+                
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Titip%20Belanja" class="bento-card span-4" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div><h4>Sahabatku Shop</h4><p>Jasa titip belanja harian yang jujur dan handal.</p></div>
+                </a>
+                
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20bayar%20Tagihan%20atau%20Pulsa" class="bento-card span-4" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-credit-card"></i>
+                    <div><h4>Sahabatku Payment</h4><p>Bayar tagihan dan pulsa dalam satu klik cerdas.</p></div>
+                </a>
+                
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Teknisi%20Rumah" class="bento-card span-4" data-aos="fade-up">
+                    <i class="fas fa-cogs"></i>
+                    <div><h4>Sahabatku Service</h4><p>Pemeliharaan teknis rumah tangga oleh tenaga ahli.</p></div>
+                </a>
+                
+                <a href="https://wa.me/6282219313326?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Kreatif" class="bento-card span-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="w-75">
+                            <i class="fas fa-magic"></i>
+                            <h4>Sahabatku Kreatif</h4>
+                            <p>Branding Digital: Desain CV, Foto Produk, dan Booster Media Sosial.</p>
                         </div>
+                        <span class="badge bg-primary px-3 py-2 rounded-pill">PREMIUM AGENT</span>
                     </div>
-                    
-                    <div class="col-md-6 mb-4 fade-init" style="animation-delay: 0.7s;">
-                        <div class="about-card-item">
-                            <i class="fas fa-store about-card-icon"></i>
-                            <h4 class="fw-bold" style="color: var(--color-secondary);">Mitra & Kolaborasi</h4>
-                            <p class="mb-0">Kami bangga bekerja sama dengan kedai, toko, dan penyedia jasa lokal, membuka akses pasar luas, dan turut mendukung pertumbuhan UMKM di Jatibarang dan sekitarnya.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="creative-detail-card fade-init" style="animation-delay: 0.9s;">
-            <div class="row align-items-center">
-                <div class="col-md-3 text-center mb-3 mb-md-0">
-                    <i class="fas fa-lightbulb fa-5x" style="color: #FFFFFF;"></i>
-                </div>
-                <div class="col-md-9">
-                    <h4 class="mb-2">SAHABAT KREATIF</h4>
-                    <p class="fw-bold mb-2">Solusi untuk kebutuhan digital dan kreatif Anda:</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Jasa pembuatan CV profesional.</li>
-                        <li><i class="fas fa-check-circle"></i> Layanan Desain (Canva Premium & Pixelab, dll).</li>
-                        <li><i class="fas fa-check-circle"></i> Photographer (Acara, Produk, dll).</li>
-                        <li><i class="fas fa-check-circle"></i> Suntik Followers/Like (IG, TikTok), dan jasa lainnya.</li>
-                    </ul>
-                    <a href="https://wa.me/6282219313326?text=Halo%20kak%2C%20Saya%20tertarik%20dengan%20jasa%20Sahabat%20Kreatif%20(desain%2Ffollowers)." class="btn btn-light mt-3 fw-bold" target="_blank">
-                        <i class="fab fa-whatsapp me-2"></i> Hubungi Sahabat Kreatif
-                    </a>
-                </div>
-            </div>
-        </div>
-        </section>
-    <section id="kontak" class="container mt-5 pt-4">
-        <h2 class="text-center mb-4 fade-init">TERHUBUNG DENGAN KAMI</h2>
-        <div class="row text-center contact-row justify-content-center fade-init" style="animation-delay: 0.2s;">
-            
-            <div class="col-3 col-md-3 contact-item">
-                <a href="https://wa.me/6282219313326" target="_blank">
-                    <i class="fab fa-whatsapp fa-4x"></i>
-                </a>
-            </div>
-            <div class="col-3 col-md-3 contact-item">
-                <a href="https://www.instagram.com/sahabatkudelivery" target="_blank">
-                    <i class="fab fa-instagram fa-4x"></i>
-                </a>
-            </div>
-            <div class="col-3 col-md-3 contact-item">
-                <a href="https://www.facebook.com/sahabatkujatibarang" target="_blank">
-                    <i class="fab fa-facebook-f fa-4x"></i>
-                </a>
-            </div>
-            <div class="col-3 col-md-3 contact-item">
-                <a href="https://tiktok.com/@sahabatkudelivery" target="_blank">
-                    <i class="fab fa-tiktok fa-4x"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="footer mt-5">
-        <p class="mb-0 fw-bold">Sahabatku Delivery</p>
-        <p class="small">Layanan Jasa Pengiriman Modern & Kreatif di Jatibarang.</p>
-        <p class="small">&copy; 2024 All rights reserved.</p>
+    <section class="testi-section" id="testimoni">
+        <div class="container text-center mb-5">
+            <h2 class="fw-900">Bukti Pelayanan Terbaik Kami</h2>
+            <p class="text-muted">Klik di area mana saja pada slider untuk <b>Jeda</b> atau <b>Melanjutkan</b></p>
+        </div>
+        <div class="swiper-container eliteSwiper" id="testiSlider">
+            <div class="swiper-wrapper" id="firebase-content">
+                </div>
+        </div>
+    </section>
+
+    <section class="container mb-5" id="karir">
+        <div class="career-card" data-aos="zoom-in">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h2 class="fw-900 display-5 mb-4">Wujudkan Karir <br>Impian Bersama Kami.</h2>
+                    <p class="opacity-75 fs-5 mb-5">Jadilah bagian dari revolusi ekonomi digital Jatibarang. Daftar sekarang!</p>
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+                        <a href="https://forms.gle/Hd2D7ZyvVCxCHy7r5" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow">Daftar Driver</a>
+                        <a href="https://forms.gle/B6YFGwHaBAYD8eUS7" class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold">Daftar Merchant</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 bg-white border-top text-center">
+        <div class="container">
+            <h2 class="navbar-brand mb-4">SAHABATKU GROUP</h2>
+            <div class="social-nav mb-4">
+                <a href="https://www.instagram.com/sahabatkudelivery" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@sahabatku-bisa" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://tiktok.com/@sahabatkudelivery" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/sahabatkujatibarang" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="text-muted small">&copy; 2026 Sahabatku Group Jatibarang. Excellence in Service.</p>
+        </div>
     </footer>
 
-<div class="modal fade" id="lowonganModal" tabindex="-1" aria-labelledby="lowonganModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="lowonganModalLabel"><i class="fas fa-briefcase me-2"></i> Lowongan Kerja Sahabatku</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-secondary fw-bold">Jadilah bagian dari tim Sahabatku Delivery! Silakan klik tombol di bawah untuk mengisi formulir resmi kami.</p>
-                <div class="alert alert-info text-center" role="alert">
-                    Formulir ini akan mengarahkan Anda ke Google Form resmi untuk mengumpulkan data pelamar.
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <a href="https://forms.gle/Hd2D7ZyvVCxCHy7r5" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-external-link-alt me-1"></i> Buka Formulir Lowongan
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<div class="modal fade" id="kemitraanModal" tabindex="-1" aria-labelledby="kemitraanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="kemitraanModalLabel"><i class="fas fa-handshake me-2"></i> Kemitraan Sahabatku</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-secondary fw-bold">Tertarik bekerjasama dengan kami? Kami membuka peluang bagi pemilik UMKM/Bisnis. Silakan klik tombol di bawah ini.</p>
-                <div class="alert alert-success text-center" role="alert">
-                    Tautan ini akan mengarahkan Anda ke Google Form kemitraan kami.
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <a href="https://forms.gle/B6YFGwHaBAYD8eUS7" target="_blank" class="btn btn-success">
-                    <i class="fas fa-external-link-alt me-1"></i> Buka Formulir Kemitraan
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+    <script>
+        AOS.init({ duration: 800, once: true });
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Konfigurasi Firebase Anda (TIDAK DIUBAH)
-    const firebaseConfig = {
-        apiKey: "AIzaSyCtva8TeL40-WotK4kFL_vL8uUXL3GDfww",
-        authDomain: "sahabatkuu-bisa.firebaseapp.com",
-        databaseURL: "https://sahabatkuu-bisa-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "sahabatkuu-bisa",
-        storageBucket: "sahabatkuu-bisa.firebasestorage.app",
-        messagingSenderId: "315555564115",
-        appId: "1:315555564115:web:56f46dbceb8c154589d4a6",
-        measurementId: "G-PFGYL96VPS"
-    };
+        // Navbar Effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
 
-    // Inisialisasi Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-    
-    // Fungsi pembantu untuk membuat ikon bintang (Diperbarui untuk Neumorphism style)
-    function generateStars(rating) {
-        let stars = '';
-        const numRating = parseInt(rating); 
-        const maxRating = 5;
-        const filledStars = Math.min(Math.max(0, numRating), maxRating); 
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtva8TeL40-WotK4kFL_vL8uUXL3GDfww",
+            authDomain: "sahabatkuu-bisa.firebaseapp.com",
+            databaseURL: "https://sahabatkuu-bisa-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sahabatkuu-bisa",
+            storageBucket: "sahabatkuu-bisa.firebasestorage.app",
+            messagingSenderId: "315555564115",
+            appId: "1:315555564115:web:56f46dbceb8c154589d4a6"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-        for (let i = 0; i < filledStars; i++) {
-            stars += `<i class="fas fa-star"></i>`;
-        }
-        for (let i = filledStars; i < maxRating; i++) {
-            stars += `<i class="far fa-star"></i>`;
-        }
-        return `<div class="testimonial-rating">${stars}</div>`;
-    }
-    
-    // Fungsi baru untuk mendapatkan inisial dari nama
-    function getInitials(name) {
-        if (!name) return 'S';
-        const parts = name.split(' ').filter(p => p.length > 0);
-        if (parts.length > 1) {
-            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-        }
-        return parts[0][0].toUpperCase();
-    }
+        let swiperInstance;
+        let isRunning = true; // Status awal slider
 
-
-    // Fungsi untuk memuat HTML Testimoni (Menggunakan style Neumorphism baru)
-    function loadTestimonials() {
-        const container = document.getElementById('testimonial-container');
-        const loadingMessage = document.getElementById('loading-message');
-
-        if (loadingMessage) { loadingMessage.remove(); }
-        
-        database.ref('testimoni').once('value', (snapshot) => {
-            if (!snapshot.exists()) {
-                container.innerHTML = '<div class="carousel-item active"><div class="col-12 text-center py-5"><p class="text-muted">Belum ada testimoni yang tersedia.</p></div></div>';
-                return;
-            }
-
-            const rawTestimonials = Object.values(snapshot.val());
-            const publishedTestimonials = rawTestimonials.filter(t => t.isPublished === true || t.isPublished === 'true');
-            publishedTestimonials.reverse(); 
-            
-            if (publishedTestimonials.length === 0) {
-                container.innerHTML = '<div class="carousel-item active"><div class="col-12 text-center py-5"><p class="text-muted">Belum ada testimoni yang terpublikasi.</p></div></div>';
-                return;
-            }
-
-            const itemsPerSlide = 3; 
-            let carouselHTML = '';
-
-            for (let i = 0; i < publishedTestimonials.length; i += itemsPerSlide) {
-                const isActive = i === 0 ? 'active' : '';
+        function loadTestimonials() {
+            database.ref('testimoni').once('value', (snapshot) => {
+                let data = [];
+                snapshot.forEach((child) => {
+                    const t = child.val();
+                    if(t.isPublished) data.push(t);
+                });
                 
-                carouselHTML += `<div class="carousel-item ${isActive}">`;
-                carouselHTML += `<div class="carousel-item-custom">`;
+                data.reverse(); // Terbaru di depan
 
-                for (let j = 0; j < itemsPerSlide; j++) {
-                    const index = i + j;
-                    if (index < publishedTestimonials.length) {
-                        const t = publishedTestimonials[index];
-                        
-                        const message = t.comments || 'Terima kasih atas ulasan Anda!';
-                        const name = t.fullname || 'Pengguna Sahabatku';
-                        const initials = getInitials(name);
-                        
-                        // Logika Penentuan Warna Speed
-                        let speedColorClass = 'bg-secondary'; 
-                        if (t.speed) {
-                            const normalizedSpeed = t.speed.toLowerCase().trim();
-                            if (normalizedSpeed.includes('cepat')) {
-                                speedColorClass = 'bg-success'; 
-                            } else if (normalizedSpeed.includes('lambat')) {
-                                speedColorClass = 'bg-danger'; 
-                            }
-                        }
-                        
-                        const speed = t.speed ? `<span class="badge ${speedColorClass} me-1 text-uppercase">${t.speed}</span>` : '';
-                        const courier = t.courier ? `<span class="badge bg-primary text-uppercase">${t.courier}</span>` : '';
-                        
-                        carouselHTML += `
-                            <div class="testimonial-card-wrapper fade-init" style="animation-delay: ${0.1 * j}s;">
-                                <div class="testimonial-card">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="testimonial-user-avatar">${initials}</div>
-                                        <div>
-                                            <p class="fw-bold mb-0" style="color: var(--color-secondary);">${name}</p>
-                                            <small class="text-muted">${generateStars(t.rating)}</small>
-                                        </div>
-                                    </div>
-                                    <p class="testimonial-message">"${message}"</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-muted fw-bold">${t.rating} / 5</small>
-                                        <div>
-                                            ${speed}
-                                            ${courier}
-                                        </div>
-                                    </div>
-                                </div>
+                let html = '';
+                data.forEach((t) => {
+                    const initial = t.fullname ? t.fullname.charAt(0).toUpperCase() : 'S';
+                    html += `
+                    <div class="swiper-slide" style="width: auto;">
+                        <div class="testi-card">
+                            <div class="text-warning mb-3">${'<i class="fas fa-star"></i>'.repeat(t.rating)}</div>
+                            <p class="small text-muted mb-4">"${t.comments}"</p>
+                            <div class="d-flex align-items-center gap-3">
+                                <div style="width:45px;height:45px;background:#0BA6DF;color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;">${initial}</div>
+                                <h6 class="mb-0 fw-bold small">${t.fullname}</h6>
                             </div>
-                        `;
+                        </div>
+                    </div>`;
+                });
+                
+                document.getElementById('firebase-content').innerHTML = html;
+
+                // Init Swiper
+                swiperInstance = new Swiper(".eliteSwiper", {
+                    loop: true,
+                    speed: 8000,
+                    autoplay: {
+                        delay: 1,
+                        disableOnInteraction: false,
+                    },
+                    slidesPerView: "auto",
+                    spaceBetween: 25,
+                    freeMode: true,
+                });
+
+                // FIXED TOGGLE LOGIC (Klik di mana saja pada kontainer)
+                const sliderEl = document.getElementById('testiSlider');
+                sliderEl.addEventListener('click', function() {
+                    if(isRunning) {
+                        swiperInstance.autoplay.stop();
+                        isRunning = false;
                     } else {
-                        carouselHTML += `<div class="testimonial-card-wrapper d-none d-md-block"></div>`;
+                        swiperInstance.autoplay.start();
+                        isRunning = true;
                     }
-                }
-
-                carouselHTML += `</div></div>`;
-            }
-            
-            container.innerHTML = carouselHTML;
-            
-            // Inisialisasi Bootstrap Carousel
-            const carouselElement = document.getElementById('testimonialCarousel');
-            new bootstrap.Carousel(carouselElement, {
-                interval: 5000
+                });
             });
-            // Terapkan observer pada kartu testimoni yang baru dimuat
-            document.querySelectorAll('.testimonial-card-wrapper.fade-init').forEach(el => {
-                observer.observe(el);
-            });
+        }
 
-
-        }).catch(error => {
-            console.error("Gagal memuat testimoni:", error);
-            container.innerHTML = '<div class="carousel-item active"><div class="col-12 text-center py-5"><p class="text-danger">Gagal memuat data testimoni. Silakan coba lagi.</p></div></div>';
-        });
-    }
-    
-    // INTERSECTION OBSERVER & DOMContentLoaded (TIDAK DIUBAH)
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const delay = entry.target.style.animationDelay ? parseFloat(entry.target.style.animationDelay) * 1000 : 0;
-                setTimeout(() => {
-                    entry.target.classList.add('animate');
-                }, delay);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Muat testimoni dari Firebase saat DOM siap
-        loadTestimonials();
-
-        // Smooth scrolling untuk Navigasi
-        document.querySelectorAll('.nav-link').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Terapkan Intersection Observer untuk animasi fade-in
-        document.querySelectorAll('.fade-init').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Animasi khusus untuk Hero Section (dijalankan tanpa observer untuk memastikan kecepatan)
-        const heroTitle = document.querySelector('.hero-title');
-        const heroSubtitle = document.querySelector('.hero-subtitle');
-        const heroButton = document.querySelector('.hero-section .btn-primary');
-        
-        setTimeout(() => { heroTitle.classList.add('animate'); }, 100);
-        setTimeout(() => { heroSubtitle.classList.add('animate'); }, 400);
-        setTimeout(() => { heroButton.classList.add('animate'); }, 700);
-    });
-</script>
+        window.onload = loadTestimonials;
+    </script>
 </body>
 </html>
