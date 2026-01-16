@@ -19,7 +19,16 @@
             --slate: #64748B;
             --light-bg: #F8FAFC;
         }
-
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden; /* Mencegah geser ke kanan */
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            overflow-x: hidden; /* Memastikan container tidak meluap */
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #ffffff;
@@ -117,6 +126,73 @@
             .hero-title { font-size: 2.8rem; }
             .span-8, .span-4 { grid-column: span 12; }
         }
+        @media (max-width: 991px) {
+            /* Perbaikan Row agar tidak makan margin luar */
+            .row {
+                margin-right: 0 !important;
+                margin-left: 0 !important;
+            }
+            
+            .col-lg-4, .col-lg-7, .col-lg-8 {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+        
+            /* Navbar Fix */
+            .navbar-collapse {
+                background: white;
+                margin: 10px 0;
+                padding: 20px;
+                border-radius: 20px;
+                width: 100%; /* Pastikan lebar pas layar */
+            }
+        
+            .social-nav {
+                display: flex !important;
+                justify-content: center;
+                margin: 15px 0 0 0 !important;
+                gap: 15px;
+            }
+        
+            /* Bento Grid Fix (Penyebab utama bocor kanan) */
+            .bento-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            
+            .bento-card {
+                grid-column: span 12 !important;
+                width: 100% !important;
+                margin: 0;
+            }
+        
+            /* Hero Text Fix */
+            .hero-title {
+                font-size: 2.5rem;
+                word-wrap: break-word; /* Agar teks panjang tidak dorong layar */
+            }
+        
+            /* Profile Container Fix */
+            .profile-container {
+                padding: 40px 20px;
+                margin: 0 10px;
+                border-radius: 30px;
+            }
+            
+            .profile-container .d-flex {
+                gap: 20px !important; /* Perkecil jarak gap di HP */
+            }
+        
+            /* Floating WA */
+            .wa-float {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -128,11 +204,12 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">SAHABATKU</a>
+            
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <i class="fas fa-bars-staggered"></i> </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto align-items-center">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link px-3" href="#kenapa">Kenapa Kami?</a></li>
                     <li class="nav-item"><a class="nav-link px-3" href="#profil">Profil</a></li>
                     <li class="nav-item"><a class="nav-link px-3" href="#layanan">Layanan</a></li>
@@ -220,7 +297,10 @@
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                 <h2 class="fw-900">Layanan Terintegrasi</h2>
-                <p class="text-muted">Satu platform elit untuk semua kebutuhan gaya hidup Anda.</p>
+                <p class="text-muted mb-2">Satu platform elit untuk semua kebutuhan gaya hidup Anda.</p>
+                <p class="small fw-bold text-primary">
+                    <i class="fas fa-touch-app me-1"></i> Klik layanan untuk terhubung langsung dengan Admin.
+                </p>
             </div>
             <div class="bento-grid">
                 <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20makanan%20%26%20Minuman" class="bento-card span-8" data-aos="fade-up">
@@ -266,15 +346,17 @@
             </div>
         </div>
     </section>
-
-    <section class="testi-section" id="testimoni">
+    <section class="testi-section" id="testimoni" style="overflow: hidden; width: 100vw;">
         <div class="container text-center mb-5">
             <h2 class="fw-900">Bukti Pelayanan Terbaik Kami</h2>
             <p class="text-muted">Klik di area mana saja pada slider untuk <b>Jeda</b> atau <b>Melanjutkan</b></p>
         </div>
-        <div class="swiper-container eliteSwiper" id="testiSlider">
-            <div class="swiper-wrapper" id="firebase-content">
-                </div>
+        
+        <div class="swiper-box" style="width: 100%; position: relative;">
+            <div class="swiper-container eliteSwiper" id="testiSlider">
+                <div class="swiper-wrapper" id="firebase-content">
+                    </div>
+            </div>
         </div>
     </section>
 
@@ -373,7 +455,8 @@
                         disableOnInteraction: false,
                     },
                     slidesPerView: "auto",
-                    spaceBetween: 25,
+                    centeredSlides: true, // Membuat slide yang aktif berada di tengah
+                    spaceBetween: 20,
                     freeMode: true,
                 });
 
