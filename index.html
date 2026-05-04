@@ -3,406 +3,998 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahabatku Group | Layanan Profesional & Terpercaya</title>
+    <title>Sahabatku Delivery - Jasa Terpercaya Jatibarang</title>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #0BA6DF;
-            --primary-dark: #0888B5;
-            --dark-deep: #0B0F19;
-            --slate: #64748B;
-            --light-bg: #F8FAFC;
+            --primary: #0080f7;
+            --primary-dark: #0066cc;
+            --primary-light: #4dabf7;
+            --secondary: #00d4aa;
+            --dark: #0f1419;
+            --dark-2: #1a1f2b;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--secondary) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
+            --shadow: 0 20px 60px rgba(0,128,247,0.25);
+            --shadow-lg: 0 35px 100px rgba(0,0,0,0.2);
+            --shadow-sm: 0 8px 25px rgba(0,0,0,0.1);
         }
-        html, body {
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255,255,255,0.98) !important; backdrop-filter: blur(25px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08); padding: 1rem 0; transition: all 0.4s ease; z-index: 1000;
+        }
+        .navbar-logo {
+            height: 40px; /* Sesuaikan tinggi logo agar pas di navbar */
+            width: auto;
+            object-fit: contain;
+        }
+        
+        /* Memastikan item menu rata tengah secara vertikal di desktop */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                align-items: center;
+            }
+        }
+        
+        /* Penyesuaian jarak tombol di mobile */
+        @media (max-width: 991px) {
+            .navbar-nav .nav-item {
+                padding: 10px 0;
+                text-align: center;
+            }
+            .navbar-logo {
+                height: 35px; /* Sedikit lebih kecil di HP */
+            }
+        }
+        .navbar.scrolled { padding: 0.75rem 0; box-shadow: 0 5px 25px rgba(0,0,0,0.12); }
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem);
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-link {
+            font-weight: 600; color: var(--dark) !important; padding: 0.75rem 1.25rem !important;
+            border-radius: 25px; transition: all 0.3s ease; font-size: 0.95rem; white-space: nowrap;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important; background: rgba(0,128,247,0.08); transform: translateY(-2px);
+        }
+
+        /* Hero - Fixed Header Overlap */
+        .hero {
+            min-height: 100vh; background: var(--gradient-dark); position: relative; overflow: hidden;
+            display: flex; align-items: center; padding-top: 120px; padding-bottom: 100px;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0,128,247,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0,212,170,0.12) 0%, transparent 50%);
+            animation: heroFloat 15s ease-in-out infinite;
+        }
+        .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1rem; }
+        .hero-title {
+            font-family: 'Poppins', sans-serif; font-size: clamp(2.2rem, 8vw, 4.2rem); font-weight: 900; line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 60%); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 3.5vw, 1.3rem); color: rgba(255,255,255,0.95);
+            margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto; font-weight: 400;
+        }
+        .cta-primary {
+            background: var(--gradient); border: none; padding: 1.25rem 2.5rem; font-size: clamp(1rem, 4vw, 1.1rem);
+            font-weight: 700; border-radius: 50px; color: white !important; box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1); text-decoration: none; display: inline-block;
             max-width: 100%;
-            overflow-x: hidden; /* Mencegah geser ke kanan */
-            margin: 0;
+        }
+        .cta-primary:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 25px 70px rgba(0,128,247,0.4); color: white !important; }
+        /* Container Utama */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff; /* Latar belakang putih bersih */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        
+        .loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px; /* Jarak antara logo dan spinner */
+        }
+        
+        /* Pengaturan Logo dari Pinterest */
+        .loading-logo-img {
+            width: 300px; /* Ukuran bisa Anda sesuaikan */
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 20px; /* Memberi jarak ke spinner di bawahnya */
+            animation: pulseLogo 2s infinite ease-in-out;
+        }
+        
+        /* Spinner Modern Biru Langit */
+        .loading-spinner {
+            width: 45px;
+            height: 45px;
+            border: 3px solid rgba(0, 202, 255, 0.1);
+            border-top: 3px solid #00CAFF; /* Warna Biru Langit Sahabatku */
+            border-radius: 50%;
+            animation: spinSpinner 1s linear infinite;
+        }
+        
+        /* Animasi Putar */
+        @keyframes spinSpinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Animasi Logo Berdenyut */
+        @keyframes pulseLogo {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+        
+        /* Class untuk menghilangkan loading via JS */
+        .loading-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* Container Utama */
+        .whatsapp-widget-container {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Jarak rapat antara teks dan ikon */
+            z-index: 9999;
+        }
+        
+        /* Banner Teks (Mirip Screenshot) */
+        .whatsapp-banner {
+            background: white;
+            color: #444;
+            padding: 8px 30px 8px 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            position: relative;
+            border: 1px solid #f0f0f0;
+            animation: fadeInRight 0.4s ease-out;
+        }
+        
+        /* Tombol Close (X) */
+        .whatsapp-banner-close {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 16px;
+            cursor: pointer;
             padding: 0;
         }
         
-        .container {
-            overflow-x: hidden; /* Memastikan container tidak meluap */
+        /* Lingkaran Luar WhatsApp (Transparan) */
+        .whatsapp-button-wrapper {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            background: rgba(37, 211, 102, 0.15); /* Hijau transparan luar */
+            border-radius: 50%;
+            transition: all 0.3s ease;
         }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #ffffff;
-            color: var(--dark-deep);
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION --- */
-        .navbar { padding: 25px 0; transition: 0.4s ease; z-index: 1050; }
-        .navbar.scrolled {
-            padding: 15px 0; background: rgba(255,255,255,0.98) !important;
-            backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-        .navbar-brand { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--primary) !important; }
-        .nav-link { font-weight: 600; color: var(--dark-deep) !important; transition: 0.3s; }
-        .nav-link:hover { color: var(--primary) !important; }
-        .social-nav a { color: var(--dark-deep); margin-left: 15px; font-size: 1.2rem; transition: 0.3s; display: inline-block; }
-        .social-nav a:hover { color: var(--primary); transform: translateY(-3px); }
-
-        /* --- HERO --- */
-        .hero {
-            padding: 190px 0 100px;
-            background: radial-gradient(circle at 90% 15%, rgba(11, 166, 223, 0.12), transparent 45%);
-        }
-        .hero-title {
-            font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 7vw, 4.8rem);
-            font-weight: 900; line-height: 0.95; letter-spacing: -3px;
-        }
-
-        /* --- WHY CHOOSE US --- */
-        .reason-card {
-            background: #fff; border: 1px solid #F1F5F9; border-radius: 30px; padding: 40px;
-            transition: 0.4s; height: 100%;
-        }
-        .reason-card:hover { border-color: var(--primary); background: #f0f9ff; transform: translateY(-5px); }
-        .reason-icon {
-            width: 60px; height: 60px; background: var(--primary); color: white;
-            border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            font-size: 24px; margin-bottom: 25px;
-        }
-
-        /* --- ELITE PROFILE --- */
-        .profile-container {
-            background: var(--dark-deep); color: white; border-radius: 50px;
-            padding: 80px 60px; position: relative; overflow: hidden;
-        }
-        .profile-container::after {
-            content: ''; position: absolute; bottom: -50px; left: -50px;
-            width: 300px; height: 300px; background: var(--primary);
-            filter: blur(150px); opacity: 0.2;
-        }
-
-        /* --- BENTO SERVICE GRID --- */
-        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px; }
-        .bento-card {
-            background: white; border-radius: 35px; padding: 40px;
-            text-decoration: none !important; color: inherit !important;
-            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            border: 1px solid #f1f5f9; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .bento-card:hover { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 40px 80px -15px rgba(11, 166, 223, 0.2); }
-        .bento-card i { font-size: 2.4rem; color: var(--primary); margin-bottom: 25px; }
-        .span-8 { grid-column: span 8; background: #f0f9ff; border: none; }
-        .span-4 { grid-column: span 4; }
-
-        /* --- TESTIMONI --- */
-        .testi-section { padding: 90px 0 30px; background: #fcfcfc; }
-        .swiper-container { cursor: pointer; padding: 20px 0; }
-        .testi-card {
-            background: white; padding: 35px; border-radius: 30px;
-            width: 360px; border: 1px solid #F1F5F9; transition: 0.4s;
-        }
-        .testi-card:hover { border-color: var(--primary); }
-
-        /* --- CAREER --- */
-        .career-card {
-            background: linear-gradient(135deg, var(--dark-deep) 0%, #1e293b 100%);
-            border-radius: 50px; padding: 80px; color: white;
-            position: relative; overflow: hidden; margin-top: 10px;
-        }
-
-        /* --- FLOATING WA --- */
-        .wa-float {
-            position: fixed; bottom: 35px; right: 35px;
-            background: #25D366; color: white; width: 65px; height: 65px;
-            border-radius: 22px; display: flex; align-items: center; justify-content: center;
-            font-size: 32px; z-index: 1000; box-shadow: 0 15px 35px rgba(37,211,102,0.3);
-            transition: 0.3s;
-        }
-        .wa-float:hover { transform: scale(1.1) rotate(10deg); color: white; }
-
-        @media (max-width: 991px) {
-            .bento-grid { display: flex; flex-direction: column; }
-            .profile-container, .career-card { padding: 45px 25px; border-radius: 35px; }
-            .hero-title { font-size: 2.8rem; }
-            .span-8, .span-4 { grid-column: span 12; }
-        }
-        @media (max-width: 991px) {
-            /* Perbaikan Row agar tidak makan margin luar */
-            .row {
-                margin-right: 0 !important;
-                margin-left: 0 !important;
-            }
-            
-            .col-lg-4, .col-lg-7, .col-lg-8 {
-                padding-left: 10px !important;
-                padding-right: 10px !important;
-            }
         
-            /* Navbar Fix */
-            .navbar-collapse {
-                background: white;
-                margin: 10px 0;
-                padding: 20px;
-                border-radius: 20px;
-                width: 100%; /* Pastikan lebar pas layar */
-            }
+        /* Lingkaran Dalam WhatsApp (Solid) */
+        .whatsapp-icon-inner {
+            width: 42px;
+            height: 42px;
+            background-color: #25d366; /* Hijau solid utama */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+        }
         
-            .social-nav {
-                display: flex !important;
-                justify-content: center;
-                margin: 15px 0 0 0 !important;
-                gap: 15px;
-            }
+        /* Efek Hover */
+        .whatsapp-button-wrapper:hover {
+            transform: scale(1.05);
+            background: rgba(37, 211, 102, 0.25);
+        }
         
-            /* Bento Grid Fix (Penyebab utama bocor kanan) */
-            .bento-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-            }
-            
-            .bento-card {
-                grid-column: span 12 !important;
-                width: 100% !important;
-                margin: 0;
-            }
+        /* Animasi Muncul */
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         
-            /* Hero Text Fix */
-            .hero-title {
-                font-size: 2.5rem;
-                word-wrap: break-word; /* Agar teks panjang tidak dorong layar */
-            }
-        
-            /* Profile Container Fix */
-            .profile-container {
-                padding: 40px 20px;
-                margin: 0 10px;
-                border-radius: 30px;
-            }
-            
-            .profile-container .d-flex {
-                gap: 20px !important; /* Perkecil jarak gap di HP */
-            }
-        
-            /* Floating WA */
-            .wa-float {
+        /* Optimasi Mobile (Kecil & Padat) */
+        @media (max-width: 768px) {
+            .whatsapp-widget-container {
                 bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
+                right: 15px;
+            }
+            .whatsapp-banner {
+                padding: 6px 25px 6px 10px;
+                font-size: 10px;
+            }
+            .whatsapp-button-wrapper {
+                width: 45px;
+                height: 45px;
+            }
+            .whatsapp-icon-inner {
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
             }
         }
+        /* Container Utama Badges */
+        .trust-badges-new {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Jarak antar elemen */
+        }
+        
+        /* Item Badge Individu */
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .trust-item span {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Ikon Kecil */
+        .trust-icon-mini {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        /* Garis Pemisah (Divider) */
+        .trust-divider {
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin: 0 5px;
+        }
+        .bg-success {
+            background-color: #28a745 !important;
+        }
+        
+        .trust-divider {
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+        }
+        
+        .trust-item span {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            .trust-badges-new {
+                gap: 10px;
+            }
+            .trust-item span {
+                font-size: 0.8rem;
+            }
+            .trust-divider {
+                margin: 0 2px;
+            }
+        }
+
+        /* Services */
+        .services-section { padding: 4rem 0; background: var(--light); }
+        /* Container Grid */
+        .services-grid {
+            display: grid;
+            gap: 20px; /* Jarak antar kartu */
+            grid-template-columns: repeat(3, 1fr); /* Default 3 kolom untuk PC */
+        }
+        
+        /* Style Kartu Layanan */
+        .service-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 202, 255, 0.15);
+            border-color: #00CAFF;
+        }
+        
+        /* Responsive Tampilan HP */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr); /* Menjadi 2 kolom di HP */
+                gap: 12px; /* Jarak lebih rapat di HP agar muat */
+            }
+            
+            .service-card {
+                padding: 15px; /* Mengurangi padding agar konten tidak sesak */
+            }
+        
+            .service-card h5 {
+                font-size: 0.95rem; /* Mengecilkan teks judul */
+            }
+        
+            .service-card p {
+                font-size: 0.75rem; /* Mengecilkan teks deskripsi */
+                line-height: 1.3;
+            }
+        }
+        .service-icon {
+            width: 75px; height: 75px; background: var(--gradient); border-radius: 18px;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;
+            margin: 0 auto 1.25rem; box-shadow: 0 12px 35px rgba(0,128,247,0.3);
+        }
+
+        /* Features */
+        .features-section { padding: 5rem 0; background: var(--white); }
+        .feature-card {
+            background: var(--white); border-radius: 20px; padding: 2.5rem 1.75rem; text-align: center;
+            box-shadow: var(--shadow-sm); transition: all 0.4s ease; border: 1px solid rgba(0,128,247,0.1); height: 100%;
+        }
+        .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); border-color: var(--primary); }
+        .feature-icon {
+            width: 90px; height: 90px; background: var(--gradient); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: white;
+            margin: 0 auto 1.5rem;
+        }
+        /* Menghilangkan scrollbar tapi tetap bisa di-scroll */
+        .mobile-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .mobile-scroll-wrapper {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            padding-bottom: 20px; /* Ruang untuk bayangan kartu */
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-scroll-wrapper {
+                padding-left: 15px; /* Memberikan kesan mengambang di kiri */
+            }
+            
+            .feature-card {
+                min-width: 250px; /* Memastikan kartu tidak gepeng di HP */
+                margin-right: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 25px;
+            }
+        
+            /* Penyesuaian ikon agar tetap konsisten dengan Sahabatku Group */
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                background: #00CAFF; /* Biru Langit Sahabatku */
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+        }
+        /* Career */
+        .career-section {
+            padding: 5rem 0; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white; position: relative; overflow: hidden;
+        }
+        .career-card {
+            background: rgba(255,255,255,0.12); backdrop-filter: blur(20px); border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.25); padding: 3.5rem 2.5rem; text-align: center;
+            transition: all 0.4s ease; box-shadow: var(--shadow);
+        }
+        .career-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.18); }
+        .career-btn {
+            background: var(--white); color: var(--primary) !important; border: none;
+            padding: 1.25rem 2.5rem; font-size: 1.1rem; font-weight: 700; border-radius: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); transition: all 0.4s ease; text-decoration: none;
+            display: inline-flex; align-items: center; margin: 0 0.75rem 1rem 0; min-width: 200px;
+        }
+        .career-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 25px 60px rgba(0,0,0,0.3); color: var(--primary) !important; }
+
+        /* Testimonials */
+        .testimonials-section { padding: 5rem 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+        .testimonial-card {
+            background: var(--white); border-radius: 20px; padding: 2.25rem 1.75rem; box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease; cursor: pointer; height: 100%; border: 1px solid rgba(0,128,247,0.1);
+        }
+        .testimonial-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--primary); }
+        /* Container pembungkus utama */
+        /* Container Group Utama */
+        .benefit-inline-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px; /* Jarak antar kapsul */
+            justify-content: flex-end; /* Sejajar kanan secara default (PC) */
+        }
+        
+        /* Item Individu Bentuk Kapsul */
+        .benefit-inline-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 50px; 
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .benefit-inline-item i {
+            color: #00CAFF; /* Warna Biru Langit Sahabatku */
+            font-size: 0.9rem;
+        }
+        
+        .benefit-inline-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00CAFF;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 202, 255, 0.2);
+        }
+        
+        /* Penyesuaian Responsif */
+        @media (max-width: 768px) {
+            .benefit-inline-group {
+                justify-content: center; /* Di HP otomatis ke tengah agar rapi */
+                gap: 8px;
+            }
+            .benefit-inline-item {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+        }
+        /* Footer */
+        /* Styling Tambahan Footer */
+        .footer { 
+            background: #0a0a0a; 
+            color: #ffffff; 
+        }
+        
+        .small-title {
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: #00CAFF; /* Biru langit Sahabatku */
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #00CAFF;
+            padding-left: 5px;
+        }
+        
+        .contact-card {
+            background: rgba(0, 202, 255, 0.05);
+            border: 1px solid rgba(0, 202, 255, 0.15);
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            background: rgba(0, 202, 255, 0.1);
+            border-color: #25d366;
+        }
+        
+        .btn-premium-success {
+            background: #25d366;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+            transition: 0.3s ease;
+        }
+        
+        .btn-premium-success:hover {
+            background: #21bd5b;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+        }
+        .social-circle {
+            width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid rgba(255,255,255,0.2);
+            font-size: 1.3rem;
+        }
+        .social-circle:hover {
+            transform: translateY(-4px) scale(1.1); border-color: var(--primary); box-shadow: 0 15px 40px rgba(0,128,247,0.3);
+        }
+        .whatsapp-footer {
+            background: #25d366 !important; border-color: #25d366 !important;
+        }
+        .whatsapp-footer:hover { box-shadow: 0 15px 40px rgba(37,211,102,0.4); }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; background: #25d366;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem;
+            color: white; box-shadow: 0 12px 40px rgba(37,211,102,0.4); z-index: 10000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); animation: pulseFloat 2s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.15) translateY(-5px); box-shadow: 0 20px 50px rgba(37,211,102,0.5); }
+
+        /* Animations */
+        @keyframes bounceIn { 0% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes heroFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes pulseFloat { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        /* Responsive Perfect */
+        @media (max-width: 768px) {
+            .hero { padding-top: 140px; padding-bottom: 80px; }
+            .services-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 60px; height: 60px; font-size: 1.8rem; }
+            .navbar-collapse { 
+                background: rgba(255,255,255,0.98); margin-top: 1rem; padding: 1.5rem; 
+                border-radius: 20px; box-shadow: var(--shadow-sm);
+            }
+            .career-btn { display: block; margin: 0 0 1rem 0; width: 100%; text-align: center; }
+            .trust-badges { flex-direction: column; align-items: center; gap: 0.75rem; }
+            .trust-badge { min-width: auto; padding: 0.875rem 1.25rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { letter-spacing: -0.02em; }
+            .hero-subtitle { padding: 0 0.5rem; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(248,250,252,0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+        .text-gradient { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     </style>
 </head>
 <body>
 
-    <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="wa-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Loading Screen -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <!-- Menggunakan link langsung dari ibb.co.com -->
+            <img src="https://i.ibb.co.com/PvF4dygN/logo-sahabatku.png" alt="Logo Sahabatku Group" class="loading-logo-img">            <div class="loading-spinner"></div>
+        </div>
+    </div>
 
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-widget-container">
+        <!-- Banner Teks (Tooltip) -->
+        <div class="whatsapp-banner" id="whatsappBanner">
+            <button type="button" id="closeWhatsappBanner" class="whatsapp-banner-close" aria-label="Close WhatsApp banner">&times;</button>
+            <p class="mb-0">"Mau Order? Hubungi Admin Sahabatku Sekarang!"</p>
+        </div>
+    
+        <!-- Tombol Ikon dengan Efek Lingkaran -->
+        <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="whatsapp-button-wrapper" target="_blank" rel="noopener">
+            <div class="whatsapp-icon-inner">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </a>
+    </div>
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">SAHABATKU</a>
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <!-- Logo Gambar -->
+                <img src="https://i.ibb.co.com/PvF4dygN/logo-sahabatku.png" alt="Sahabatku Logo" class="navbar-logo me-2">
+                <!-- Nama Brand -->
+                <span class="fw-bold">SAHABATKU</span>
+            </a>
             
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="fas fa-bars-staggered"></i> </button>
-            
+            <button class="navbar-toggler border-0 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars fs-2 text-primary"></i>
+            </button>
+    
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link px-3" href="#kenapa">Kenapa Kami?</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#profil">Profil</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#layanan">Layanan</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#karir">Karir</a></li>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fitur">Keunggulan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#karir">Karir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimoni">Ulasan</a></li>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="btn btn-primary px-4 py-2 rounded-pill fw-bold" target="_blank" rel="noopener">
+                            <i class="fab fa-whatsapp me-1"></i>Pesan Sekarang!
+                        </a>
+                    </li>
                 </ul>
-                <div class="social-nav d-none d-lg-flex">
-                    <a href="https://www.instagram.com/sahabatkudelivery" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://youtube.com/@sahabatku-bisa" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://tiktok.com/@sahabatkudelivery" target="_blank"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.facebook.com/sahabatkujatibarang" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </div>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="container" data-aos="fade-up">
-            <h6 class="text-primary fw-800 mb-4">PLATFORM MULTI-PRIDE #1</h6>
-            <h1 class="hero-title mb-4">Pelayanan Modern <br><span class="text-primary">Andalan Anda.</span></h1>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-9 col-xl-8 col-lg-10 hero-content">
+                    <h1 class="hero-title mb-4" data-aos="fade-up" data-aos-duration="1000">Jasa Terpercaya <br><span class="d-block">Jatibarang #1</span></h1>
+                    <p class="hero-subtitle lead mb-5 mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        Pesan makanan, ojek, kirim barang, titip belanja, pembayaran tagihan dan lainnya.<br>
+                        <strong>Hubungi WhatsApp</strong> untuk order cepat & mudah!
+                    </p>
+                    <div data-aos="zoom-in" data-aos-delay="400" data-aos-duration="1000">
+                        <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order%20Nih!" class="cta-primary mb-4" target="_blank" rel="noopener">
+                            <i class="fab fa-whatsapp me-2"></i>Pesan via WhatsApp
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-md-end justify-content-center mt-4">
+                        <div class="trust-badges-new" data-aos="fade-left" data-aos-delay="600">
+                            <div class="trust-item">
+                                <div class="trust-icon-mini bg-warning"><i class="fas fa-medal"></i></div>
+                                <span>Terbaik Lokal</span>
+                            </div>
+                            <div class="trust-divider">|</div>
+                            <div class="trust-item">
+                                <div class="trust-icon-mini bg-success"><<i class="fas fa-check-circle"></i></div>
+                                <span>100% Terpercaya</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="layanan">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold mb-3 text-gradient">Pilih Layanan</h2>
+                <p class="lead text-muted">Klik tombol di bawah untuk langsung chat WhatsApp</p>
+            </div>
             
-            <div class="mb-5">
-                <a href="https://wa.me/628211845415?text=Halo%20kak,%20Saya%20mau%20order!" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg">
-                    <i class="fab fa-whatsapp me-2"></i> Order Sekarang
+            <!-- Grid Layanan -->
+            <div class="services-grid">
+                <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20Saya%20mau️%20FOOD" class="service-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                    <h5 class="fw-bold mb-2">Food Delivery</h5>
+                    <p class="text-muted mb-2 small">Makanan favoritmu diantar cepat</p>
+                    <small class="text-primary fw-bold">Pesan →</small>
                 </a>
+                <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20Saya%20mau%20🛵%20OJek" class="service-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-motorcycle"></i></div>
+                    <h5 class="fw-bold mb-2">Ojek Online</h5>
+                    <p class="text-muted mb-2 small">Jemput antar kemana saja aman</p>
+                    <small class="text-primary fw-bold">Pesan →</small>
+                </a>
+                <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20Saya%20mau%20📦%20Kirim%20Barang" class="service-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-icon"><i class="fas fa-box"></i></div>
+                    <h5 class="fw-bold mb-2">Kirim Paket</h5>
+                    <p class="text-muted mb-2 small">Paket aman sampai tujuan</p>
+                    <small class="text-primary fw-bold">Pesan →</small>
+                </a>
+                <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20Saya%20mau%20🛒%20Titip%20Belanja" class="service-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="service-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <h5 class="fw-bold mb-2">Titip Belanja</h5>
+                    <p class="text-muted mb-2 small">Belanja hemat tanpa keluar rumah</p>
+                    <small class="text-primary fw-bold">Pesan →</small>
+                </a>
+                <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20Saya%20mau%20💳%20Bayar%20Tagihan" class="service-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="service-icon"><i class="fas fa-credit-card"></i></div>
+                    <h5 class="fw-bold mb-2">Bayar Tagihan</h5>
+                    <p class="text-muted mb-2 small">Pulsa, PLN, & tagihan lainnya</p>
+                    <small class="text-primary fw-bold">Pesan →</small>
+                </a>
+                <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20Saya%20mau%20Order%20Nih!" class="service-card" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h5 class="fw-bold mb-2">Jasa Lainnya</h5>
+                    <p class="text-muted mb-2 small">Layanan apapun sesuai permintaanmu</p>
+                    <small class="text-primary fw-bold">Pesan →</small>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <!-- Features Section -->
+    <section class="features-section" id="fitur">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold mb-3">Keunggulan Kami</h2>
+                <p class="lead text-muted">Mengapa ribuan orang mempercayai Sahabatku</p>
+            </div>
+            
+            <!-- Tambahkan class mobile-scroll-wrapper -->
+            <div class="row g-4 flex-nowrap mobile-scroll-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <div class="col-lg-4 col-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon mb-4"><i class="fas fa-bolt-lightning"></i></div>
+                        <h4 class="fw-bold mb-3 fs-5">Respon Cepat</h4>
+                        <p class="text-muted small">Driver terdekat siap jemput dalam hitungan menit</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon mb-4"><i class="fas fa-shield-halved"></i></div>
+                        <h4 class="fw-bold mb-3 fs-5">Keamanan Terjamin</h4>
+                        <p class="text-muted small">Semua driver terverifikasi dan dilatih profesional</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-8" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon mb-4"><i class="fas fa-headset"></i></div>
+                        <h4 class="fw-bold mb-3 fs-5">Pelayanan Ramah</h4>
+                        <p class="text-muted small">Customer service siap membantu via WhatsApp kapan saja</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Section -->
+    <section class="career-section" id="karir">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <h2 class="display-4 fw-bold mb-4">Gabung Tim Sahabatku</h2>
+                        <p class="lead mb-0 opacity-90 fs-5">Tingkatkan penghasilanmu menjadi bagian dari keluarga besar kami</p>
+                    </div>
+                    <div class="career-card text-center" data-aos="zoom-in" data-aos-duration="1200">
+                        <i class="fas fa-users fa-3x mb-4 text-white opacity-90"></i>
+                        <h3 class="display-5 fw-bold mb-4">Lowongan Kerja Tersedia</h3>
+                        <p class="lead mb-5 opacity-90 fs-6">Daftar sekarang dan mulai dapat order harian! Proses cepat & gratis.</p>
+                        
+                        <div class="d-flex flex-wrap justify-content-center gap-4 mb-5">
+                            <a href="https://forms.gle/hb9dsMKupdjAif6m9" class="career-btn" target="_blank" rel="noopener">
+                                <i class="fas fa-motorcycle me-2"></i> Daftar Driver
+                            </a>
+                            <a href="https://forms.gle/B6YFGwHaBAYD8eUS7" class="career-btn" target="_blank" rel="noopener">
+                                <i class="fas fa-store me-2"></i> Daftar Merchant
+                            </a>
+                        </div>
+                    
+                        <!-- Grid Manfaat Sejajar Kanan -->
+                        <div class="d-flex justify-content-md-end justify-content-center mt-4">
+                            <div class="benefit-inline-group">
+                                <div class="benefit-inline-item">
+                                    <i class="fas fa-bolt me-2"></i>
+                                    <span>Proses Cepat</span>
+                                </div>
+                                <div class="benefit-inline-item">
+                                    <i class="fas fa-tags me-2"></i>
+                                    <span>Gratis Daftar</span>
+                                </div>
+                                <div class="benefit-inline-item">
+                                    <i class="fas fa-graduation-cap me-2"></i>
+                                    <span>Pelatihan</span>
+                                </div>
+                                <div class="benefit-inline-item">
+                                    <i class="fas fa-wallet me-2"></i>
+                                    <span>Cuan Harian</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimoni">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold mb-3">Apa Kata Pelanggan?</h2>
+                <p class="lead text-muted">Testimoni asli dari pelanggan setia kami</p>
+            </div>
+            <div class="swiper" id="testiSlider">
+                <div class="swiper-wrapper" id="firebase-content"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <!-- Branding Utama -->
+                    <h3 class="navbar-brand mb-3 d-flex align-items-center fw-bold">SAHABATKU GROUP</h3>
+                    <p class="opacity-75 mb-4 small">
+                        Jasa terpercaya #1 Jatibarang. Order mudah via WhatsApp dengan pelayanan terbaik
+                    </p>
+                    <!-- Ikon Sosial Media -->
+                    <div class="d-flex gap-3 mb-4">
+                        <a href="https://www.facebook.com/sahabatkujatibarang" class="social-circle bg-primary text-white" target="_blank" rel="noopener" title="Facebook Sahabatku">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/sahabatkudelivery" class="social-circle bg-gradient text-white" target="_blank" rel="noopener" title="Instagram Sahabatku">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://tiktok.com/@sahabatkudelivery" class="social-circle bg-dark text-white" target="_blank" rel="noopener" title="TikTok Sahabatku">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://x.com/sahabatkudelivery" class="social-circle bg-dark text-white" target="_blank" rel="noopener" title="X/Twitter Sahabatku">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-3">Layanan</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#layanan" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Food Delivery</a></li>
+                        <li class="mb-2"><a href="#layanan" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Ojek Online</a></li>
+                        <li class="mb-2"><a href="#layanan" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Pengiriman</a></li>
+                        <li class="mb-2"><a href="#layanan" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Titip Belanja</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-3">Perusahaan</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#fitur" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Keunggulan</a></li>
+                        <li class="mb-2"><a href="#karir" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Lowongan Kerja</a></li>
+                        <li class="mb-2"><a href="#testimoni" class="text-decoration-none text-white opacity-75"><i class="fas fa-chevron-right me-2 text-primary"></i>Testimoni</a></li>
+                    </ul>
+                </div>
+    
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-3">WhatsApp Resmi</h5>
+                    <!-- Card Kontak Interaktif -->
+                    <a href="https://wa.me/628211845415" class="d-flex align-items-center text-decoration-none mb-3 p-3 bg-primary bg-opacity-10 rounded-3 border border-primary border-opacity-25 hover-shadow" target="_blank" rel="noopener">
+                        <div class="whatsapp-footer social-circle me-3 flex-shrink-0" style="background: #25d366; border: none;">
+                            <i class="fab fa-whatsapp text-white"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold fs-6 mb-1 text-white">+62 821-1845-415</div>
+                            <small class="text-success fw-semibold d-block">● Online (Respon Cepat)</small>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20mau%20tanya?" class="btn btn-success w-100 fw-bold shadow-lg py-2">
+                        <i class="fab fa-whatsapp me-2"></i>Ajukan Pertanyaan
+                    </a>
+                </div>
             </div>
     
-            <p class="lead text-muted w-50 d-none d-lg-block">Ekosistem terpadu yang mendefinisikan ulang cara Anda berinteraksi dengan layanan harian melalui teknologi terdepan.</p>
-        </div>
-    </section>
-
-    <section class="py-5" id="kenapa">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-900">Kenapa Harus Sahabatku?</h2>
-                <p class="text-muted">Alasan strategis mengapa ribuan pelanggan memilih layanan kami.</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="reason-card">
-                        <div class="reason-icon"><i class="fas fa-bolt"></i></div>
-                        <h4 class="fw-800">Kecepatan Responsif</h4>
-                        <p class="text-muted mb-0">Manajemen armada cerdas memastikan kebutuhan Anda terpenuhi dalam waktu singkat tanpa kompromi kualitas.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="reason-card">
-                        <div class="reason-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <h4 class="fw-800">Keamanan Berlapis</h4>
-                        <p class="text-muted mb-0">Seluruh Driver kami telah melalui proses verifikasi ketat untuk menjamin keamanan transaksi dan kenyamanan Anda.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="reason-card">
-                        <div class="reason-icon"><i class="fas fa-gem"></i></div>
-                        <h4 class="fw-800">Kualitas Premium</h4>
-                        <p class="text-muted mb-0">Kami menghadirkan pengalaman layanan kelas atas yang personal dan eksklusif untuk setiap pelanggan.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-5" id="profil">
-        <div class="container">
-            <div class="profile-container" data-aos="fade-up">
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <h2 class="fw-900 display-5 mb-4">Dedikasi Untuk <br>Masa Depan Digital.</h2>
-                        <p class="opacity-75 fs-5 mb-5">Sahabatku Group bukan sekadar penyedia jasa, kami adalah mitra strategis Anda. Lahir di Jatibarang untuk memberikan standar pelayanan terbaik bagi masyarakat lokal. Kami terus berevolusi untuk menciptakan kemudahan yang bermakna setiap harinya.</p>
-                        <div class="d-flex gap-5">
-                            <div><h3 class="fw-900 mb-0">Elite</h3><small class="opacity-50">Service Standard</small></div>
-                            <div class="border-start ps-5"><h3 class="fw-900 mb-0">Trusted</h3><small class="opacity-50">Digital Partner</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 d-none d-lg-block text-end">
-                        <i class="fas fa-fingerprint text-primary opacity-20" style="font-size: 15rem;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5" id="layanan">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-900">Layanan Terintegrasi</h2>
-                <p class="text-muted mb-2">Satu platform elit untuk semua kebutuhan gaya hidup Anda.</p>
-                <p class="small fw-bold text-primary">
-                    <i class="fas fa-touch-app me-1"></i> Klik layanan untuk terhubung langsung dengan Admin.
+            <hr class="my-4 opacity-25">
+    
+            <div class="text-center pt-3">
+                <p class="mb-0 opacity-75 small">
+                    &copy; 2026 <strong>Sahabatku Group</strong>. Jatibarang, Indramayu. 
+                    <i class="fas fa-heart text-danger ms-1"></i> Rekomendasi Jasa Lokal.
                 </p>
             </div>
-            <div class="bento-grid">
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20makanan%20%26%20Minuman" class="bento-card span-8" data-aos="fade-up">
-                    <i class="fas fa-utensils"></i>
-                    <div><h4>Sahabatku Food</h4><p>Pesan antar kuliner terbaik dengan standar pengiriman higienis.</p></div>
-                </a>
-                
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20Ojek" class="bento-card span-4" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-motorcycle"></i>
-                    <div><h4>Sahabatku Ojek</h4><p>Transportasi aman dengan driver profesional.</p></div>
-                </a>
-                
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Kirim%20Paket" class="bento-card span-4" data-aos="fade-up">
-                    <i class="fas fa-paper-plane"></i>
-                    <div><h4>Sahabatku Send</h4><p>Kirim paket dan dokumen instan kemana saja.</p></div>
-                </a>
-                
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Titip%20Belanja" class="bento-card span-4" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-shopping-bag"></i>
-                    <div><h4>Sahabatku Shop</h4><p>Jasa titip belanja harian yang jujur dan handal.</p></div>
-                </a>
-                
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20bayar%20Tagihan%20atau%20Pulsa" class="bento-card span-4" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-credit-card"></i>
-                    <div><h4>Sahabatku Payment</h4><p>Bayar tagihan dan pulsa dalam satu klik cerdas.</p></div>
-                </a>
-                
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Lainnya" class="bento-card span-4" data-aos="fade-up">
-                    <i class="fas fa-cogs"></i>
-                    <div><h4>Sahabatku Service</h4><p>Pemeliharaan teknis rumah tangga oleh tenaga ahli.</p></div>
-                </a>
-                
-                <a href="https://wa.me/628211845415?text=Halo%20Kak,%20Saya%20mau%20pesan%20layanan%20Kreatif" class="bento-card span-8" data-aos="fade-up" data-aos-delay="100">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="w-75">
-                            <i class="fas fa-magic"></i>
-                            <h4>Sahabatku Kreatif</h4>
-                            <p>Branding Digital: Desain CV, Foto Produk, dan Booster Media Sosial.</p>
-                        </div>
-                        <span class="badge bg-primary px-3 py-2 rounded-pill">PREMIUM AGENT</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="testi-section" id="testimoni" style="overflow: hidden; width: 100vw;">
-        <div class="container text-center mb-5">
-            <h2 class="fw-900">Bukti Pelayanan Terbaik Kami</h2>
-            <p class="text-muted">Klik di area mana saja pada slider untuk <b>Jeda</b> atau <b>Melanjutkan</b></p>
-        </div>
-        
-        <div class="swiper-box" style="width: 100%; position: relative;">
-            <div class="swiper-container eliteSwiper" id="testiSlider">
-                <div class="swiper-wrapper" id="firebase-content">
-                    </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container mb-5" id="karir">
-        <div class="career-card" data-aos="zoom-in">
-            <div class="row align-items-center">
-                <div class="col-lg-8 text-center text-lg-start">
-                    <h2 class="fw-900 display-5 mb-4">Wujudkan Karir <br>Impian Bersama Kami.</h2>
-                    <p class="opacity-75 fs-5 mb-5">Jadilah bagian dari revolusi ekonomi digital Jatibarang. Daftar sekarang!</p>
-                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
-                        <a href="https://forms.gle/hb9dsMKupdjAif6m9" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow">Daftar Driver</a>
-                        <a href="https://forms.gle/B6YFGwHaBAYD8eUS7" class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold">Daftar Merchant</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-5 bg-white border-top text-center">
-        <div class="container">
-            <h2 class="navbar-brand mb-4">SAHABATKU GROUP</h2>
-            <div class="social-nav mb-4">
-                <a href="https://www.instagram.com/sahabatkudelivery" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com/@sahabatku-bisa" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://tiktok.com/@sahabatkudelivery" target="_blank"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.facebook.com/sahabatkujatibarang" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            </div>
-            <p class="text-muted small">&copy; 2026 Sahabatku Group Jatibarang.Excellence in Service.</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        AOS.init({ duration: 800, once: true });
-
-        // Navbar Effect
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('.navbar');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loading = document.getElementById('loadingScreen');
+                loading.style.opacity = '0';
+                setTimeout(() => loading.style.display = 'none', 600);
+            }, 1500);
         });
 
-        // Firebase Config
+        // AOS Animation
+        AOS.init({ 
+            duration: 1000, 
+            once: true, 
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Smooth Scroll & Navbar Collapse
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                // Close mobile navbar
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    new bootstrap.Collapse(navbarCollapse).hide();
+                }
+            });
+        });
+
+        // Swiper Testimonials
+        const swiper = new Swiper("#testiSlider", {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            pagination: { 
+                el: '.swiper-pagination', 
+                clickable: true,
+                dynamicBullets: true 
+            },
+            breakpoints: {
+                576: { slidesPerView: 1, spaceBetween: 20 },
+                768: { slidesPerView: 2, spaceBetween: 24 },
+                992: { slidesPerView: 3, spaceBetween: 30 }
+            }
+        });
+
+        // Firebase Real-time Testimonials
         const firebaseConfig = {
             apiKey: "AIzaSyCtva8TeL40-WotK4kFL_vL8uUXL3GDfww",
             authDomain: "sahabatkuu-bisa.firebaseapp.com",
@@ -412,69 +1004,101 @@
             messagingSenderId: "315555564115",
             appId: "1:315555564115:web:56f46dbceb8c154589d4a6"
         };
+
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        let swiperInstance;
-        let isRunning = true; // Status awal slider
-
-        function loadTestimonials() {
-            database.ref('testimoni').once('value', (snapshot) => {
-                let data = [];
-                snapshot.forEach((child) => {
-                    const t = child.val();
-                    if(t.isPublished) data.push(t);
-                });
-                
-                data.reverse(); // Terbaru di depan
-
-                let html = '';
-                data.forEach((t) => {
-                    const initial = t.fullname ? t.fullname.charAt(0).toUpperCase() : 'S';
-                    html += `
-                    <div class="swiper-slide" style="width: auto;">
-                        <div class="testi-card">
-                            <div class="text-warning mb-3">${'<i class="fas fa-star"></i>'.repeat(t.rating)}</div>
-                            <p class="small text-muted mb-4">"${t.comments}"</p>
-                            <div class="d-flex align-items-center gap-3">
-                                <div style="width:45px;height:45px;background:#0BA6DF;color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;">${initial}</div>
-                                <h6 class="mb-0 fw-bold small">${t.fullname}</h6>
+        database.ref('testimoni').once('value').then(snapshot => {
+            let data = [], html = '';
+            snapshot.forEach(child => {
+                const t = child.val();
+                if (t && t.isPublished && t.comments) {
+                    data.push(t);
+                }
+            });
+            
+            // 8 testimoni terbaru
+            data.slice(-8).reverse().forEach(t => {
+                const initial = t.fullname ? t.fullname.charAt(0).toUpperCase() : 'S';
+                html += `
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="stars mb-4">${'<i class="fas fa-star text-warning"></i>'.repeat(Math.floor(t.rating || 5))}</div>
+                            <p class="fw-semibold fs-6 lh-lg mb-4">"${t.comments}"</p>
+                            <div class="d-flex align-items-center">
+                                <div style="width:48px;height:48px;background:var(--gradient);color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;flex-shrink:0;box-shadow:var(--shadow-sm);"> ${initial}</div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1 fw-bold">${t.fullname || 'Pelanggan'}</h6>
+                                    <small class="text-primary fw-semibold">Pelanggan Setia</small>
+                                </div>
                             </div>
                         </div>
                     </div>`;
-                });
-                
-                document.getElementById('firebase-content').innerHTML = html;
+            });
 
-                // Init Swiper
-                swiperInstance = new Swiper(".eliteSwiper", {
-                    loop: true,
-                    speed: 8000,
-                    autoplay: {
-                        delay: 1,
-                        disableOnInteraction: false,
-                    },
-                    slidesPerView: "auto",
-                    centeredSlides: true, // Membuat slide yang aktif berada di tengah
-                    spaceBetween: 20,
-                    freeMode: true,
-                });
+            const content = document.getElementById('firebase-content');
+            content.innerHTML = html || `
+                <div class="swiper-slide">
+                    <div class="testimonial-card p-5 text-center">
+                        <i class="fas fa-heart fa-2x text-primary mb-4 d-block"></i>
+                        <h5 class="text-primary fw-bold mb-3">Pelanggan Sangat Puas!</h5>
+                        <p class="text-muted lead">"Layanan tercepat dan terpercaya di Jatibarang. Recommended!"</p>
+                        <div class="stars mt-3">${'<i class="fas fa-star text-warning"></i>'.repeat(5)}</div>
+                    </div>
+                </div>
+            `;
+            swiper.update();
+        }).catch(() => {
+            // Fallback content
+            document.getElementById('firebase-content').innerHTML = `
+                <div class="swiper-slide">
+                    <div class="testimonial-card p-5 text-center">
+                        <i class="fas fa-comments fa-2x text-primary mb-4"></i>
+                        <h5 class="text-primary fw-bold mb-3">Pelanggan Puas!</h5>
+                        <p class="text-muted">"Pelayanan profesional dan ramah. Sangat direkomendasikan!"</p>
+                    </div>
+                </div>`;
+        });
 
-                // FIXED TOGGLE LOGIC (Klik di mana saja pada kontainer)
-                const sliderEl = document.getElementById('testiSlider');
-                sliderEl.addEventListener('click', function() {
-                    if(isRunning) {
-                        swiperInstance.autoplay.stop();
-                        isRunning = false;
-                    } else {
-                        swiperInstance.autoplay.start();
-                        isRunning = true;
+        // Preload critical resources
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        AOS.refresh();
+                        observer.unobserve(entry.target);
                     }
                 });
             });
+            observer.observe(document.querySelector('#layanan'));
         }
-
-        window.onload = loadTestimonials;
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("loadingScreen");
+            // Memberikan jeda sedikit agar transisi terlihat smooth
+            setTimeout(() => {
+                loader.classList.add("loading-hidden");
+            }, 1500); 
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeBtn = document.getElementById('closeWhatsappBanner');
+            const banner = document.getElementById('whatsappBanner');
+    
+            if (closeBtn && banner) {
+                closeBtn.addEventListener('click', function(e) {
+                    // Mencegah klik menembus ke link WhatsApp di bawahnya
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Menghilangkan banner dengan efek fade out sederhana
+                    banner.style.opacity = '0';
+                    banner.style.transition = '0.3s ease';
+                    
+                    setTimeout(() => {
+                        banner.style.display = 'none';
+                    }, 300);
+                });
+            }
+        });
     </script>
 </body>
 </html>
