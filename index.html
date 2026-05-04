@@ -45,7 +45,7 @@
             width: auto;
             object-fit: contain;
         }
-        
+
         /* Memastikan item menu rata tengah secara vertikal di desktop */
         @media (min-width: 992px) {
             .navbar-nav {
@@ -62,6 +62,41 @@
             .navbar-logo {
                 height: 35px; /* Sedikit lebih kecil di HP */
             }
+        }
+        /* Styling Tombol Profil */
+        .btn-profile-special {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: rgba(0, 202, 255, 0.05);
+            border: 1px solid rgba(0, 202, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-profile-special i {
+            color: #00CAFF; /* Biru Langit Sahabatku */
+        }
+        
+        .btn-profile-special:hover {
+            background: #00CAFF;
+            color: #fff;
+            border-color: #00CAFF;
+            transform: translateY(-2px);
+        }
+        
+        .btn-profile-special:hover i {
+            color: #fff;
+        }
+        
+        /* Responsif untuk Mobile agar rapi */
+        @media (max-width: 991px) {
+            .navbar-brand { font-size: 1.1rem; }
+            .btn-profile-special { padding: 5px 8px; font-size: 0.75rem; }
         }
         .navbar.scrolled { padding: 0.75rem 0; box-shadow: 0 5px 25px rgba(0,0,0,0.12); }
         .navbar-brand {
@@ -128,7 +163,7 @@
         
         /* Pengaturan Logo dari Pinterest */
         .loading-logo-img {
-            width: 300px; /* Ukuran bisa Anda sesuaikan */
+            width: 150px; /* Ukuran bisa Anda sesuaikan */
             height: auto;
             object-fit: contain;
             display: block;
@@ -619,11 +654,10 @@
 <body>
 
     <!-- Loading Screen -->
-    <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <!-- Menggunakan link langsung dari ibb.co.com -->
-            <img src="https://i.ibb.co.com/PvF4dygN/logo-sahabatku.png" alt="Logo Sahabatku Group" class="loading-logo-img">            <div class="loading-spinner"></div>
+            <img src="https://i.ibb.co.com/fGNHxPc5/logo-sahabatku.png" alt="Logo Sahabatku Group" class="loading-logo-img">
         </div>
     </div>
 
@@ -647,11 +681,16 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#home">
                 <!-- Logo Gambar -->
-                <img src="https://i.ibb.co.com/PvF4dygN/logo-sahabatku.png" alt="Sahabatku Logo" class="navbar-logo me-2">
+                <img src="https://i.ibb.co.com/fGNHxPc5/logo-sahabatku.png" alt="Sahabatku Logo" class="navbar-logo me-2">
                 <!-- Nama Brand -->
                 <span class="fw-bold">SAHABATKU</span>
             </a>
-            
+            <div class="ms-auto ms-lg-3 me-2 order-lg-1">
+                <a href="profilsahabatku.html" class="btn-profile-special">
+                    <i class="fas fa-user-circle fs-5"></i>
+                    <span class="d-none d-md-inline ms-1">Profil</span>
+                </a>
+            </div>           
             <button class="navbar-toggler border-0 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <i class="fas fa-bars fs-2 text-primary"></i>
             </button>
