@@ -6,8 +6,10 @@
     <title>Sahabatku Group - Profil Perusahaan | Jasa Terpercaya Jatibarang</title>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
@@ -817,9 +819,31 @@
         <div class="container">
             <div class="row align-items-center gy-5">
                 <div class="col-lg-6 order-lg-2" data-aos="fade-left">
-                    <div class="about-image">
-                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=500&fit=crop" alt="Tim Sahabatku Group">
-                        <div class="about-badge">
+                    <div class="swiper about-slider rounded-4 shadow-lg overflow-hidden" style="height: 500px;">
+                        <div class="swiper-wrapper">
+                            <!-- Foto 1 (Pastikan tanda kutip lengkap) -->
+                            <div class="swiper-slide">
+                                <img src="https://i.ibb.co.com/JWm5HFpC/IMG-20260301-WA0043.jpg" class="w-100 h-100 object-fit-cover" alt="Tim Sahabatku 1">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.ibb.co.com/zhzHYGV2/IMG-20260401-WA0102.jpg" class="w-100 h-100 object-fit-cover" alt="Tim Sahabatku 2">
+                            </div>                            
+                            <!-- Foto 2 -->
+                            <div class="swiper-slide">
+                                <img src="https://i.ibb.co.com/93r2WbRk/IMG-20260502-WA0007.jpg" class="w-100 h-100 object-fit-cover" alt="Tim Sahabatku 2">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.ibb.co.com/2YmSdfHQ/IMG-20260306-WA0043.jpg" class="w-100 h-100 object-fit-cover" alt="Tim Sahabatku 2">
+                            </div>                       
+                            <div class="swiper-slide">
+                                <img src="https://i.ibb.co.com/Kxrn2WLj/IMG-20260301-WA0136.jpg" class="w-100 h-100 object-fit-cover" alt="Tim Sahabatku 2">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.ibb.co.com/Zr4T9nT/IMG-20260131-WA0034.jpg" class="w-100 h-100 object-fit-cover" alt="Tim Sahabatku 2">
+                            </div>                                
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="about-badge" style="z-index: 10;">
                             <i class="fas fa-award me-2"></i>#1 Jatibarang
                         </div>
                     </div>
@@ -1283,7 +1307,25 @@
                 }
             });
         });
-
+        // Pastikan ini diletakkan setelah script Swiper di atas
+        document.addEventListener('DOMContentLoaded', function() {
+            const aboutSwiper = new Swiper('.about-slider', {
+                loop: true,
+                speed: 1000, // Kecepatan transisi (1 detik)
+                autoplay: {
+                    delay: 3000, // Durasi tiap foto tampil (3 detik)
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                effect: 'fade', // Efek memudar agar lebih profesional
+                fadeEffect: {
+                    crossFade: true
+                },
+            });
+        });
         // WhatsApp Banner Close
         document.addEventListener('DOMContentLoaded', function() {
             const closeBtn = document.getElementById('closeWhatsappBanner');
