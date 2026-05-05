@@ -545,6 +545,60 @@
                 padding: 6px 12px;
             }
         }
+        /* Section Sponsor */
+        .sponsor-section {
+            padding: 60px 0;
+            background: #ffffff;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .sponsor-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #64748b; /* Warna abu-abu profesional */
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        /* Pengaturan Ukuran Logo Agar Seragam */
+        .sponsor-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .sponsor-logo {
+            /* Ukuran disamakan secara tinggi (height) agar seimbang */
+            height: 70px; 
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            /* Filter dihapus agar warna muncul asli */
+        }
+        
+        .sponsor-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Khusus Main Sponsor dibuat sedikit lebih dominan */
+        .logo-main {
+            height: 90px;
+        }
+        
+        @media (max-width: 768px) {
+            .sponsor-container {
+                gap: 30px;
+            }
+            .sponsor-logo {
+                height: 50px;
+            }
+            .logo-main {
+                height: 65px;
+            }
+        }
         /* Footer */
         /* Styling Tambahan Footer */
         .footer { 
@@ -893,7 +947,34 @@
             </div>
         </div>
     </section>
-
+    <!-- Section Sponsorship -->
+    <section class="sponsor-section">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <!-- Main Sponsor -->
+                <div class="col-12 mb-4" data-aos="fade-up">
+                    <p class="sponsor-title">Main Sponsor</p>
+                    <div class="main-sponsor-box">
+                        <!-- Ganti link di bawah dengan link foto Liren Warkop Anda -->
+                        <img src="https://i.ibb.co.com/Zpkxq9CP/Jaket-desain-sahabatku-2026-1.png" alt="Liren Warkop" class="sponsor-logo logo-main" title="Liren Warkop - Main Sponsor">
+                    </div>
+                </div>
+    
+                <!-- Supporting Sponsors -->
+                <div class="col-12" data-aos="fade-up" data-aos-delay="200">
+                    <p class="sponsor-title">Supporting Sponsors</p>
+                    <div class="sponsor-wrapper">
+                        <div class="supporting-sponsor-box">
+                            <!-- Ganti link di bawah dengan link foto Stiego Anda -->
+                            <img src="https://i.ibb.co.com/GfB4JVQX/Jaket-desain-sahabatku-2026.png" alt="Stiego" class="sponsor-logo" title="Stiego - Partner Resmi">
+                            
+                            <!-- Jika ada partner lain di masa depan, tinggal tambah <img> di sini -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Footer -->
     <!-- Footer -->
     <footer class="footer">
