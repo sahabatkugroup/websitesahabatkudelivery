@@ -153,7 +153,56 @@
             .whatsapp-button-wrapper { width: 45px; height: 45px; }
             .whatsapp-icon-inner { width: 36px; height: 36px; font-size: 20px; }
         }
-
+        /* Container Utama */
+        .whatsapp-widget-container {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px; /* Jarak pendek ke arah bawah */
+            z-index: 9999;
+        }
+        
+        .whatsapp-bottom-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Gaya Tombol Kembali - Warna Biru */
+        .back-widget-button {
+            text-decoration: none;
+            margin-right: 5px; /* Menyelaraskan dengan lingkaran WA di bawahnya */
+        }
+        
+        .back-widget-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 128, 247, 0.1); /* Background biru transparan halus */
+            color: #0080f7; /* Warna biru utama untuk panah */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 128, 247, 0.15);
+            border: 1px solid rgba(0, 128, 247, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-widget-icon:hover {
+            transform: translateY(-3px);
+            background: #0080f7; /* Saat dihover berubah jadi biru penuh */
+            color: white; /* Panah jadi putih saat dihover */
+        }
+        
+        /* Penyesuaian Mobile */
+        @media (max-width: 768px) {
+            .whatsapp-widget-container { bottom: 20px; right: 15px; gap: 5px; }
+            .back-widget-icon { width: 34px; height: 34px; font-size: 14px; }
+        }
         /* Trust Badges */
         .trust-badges-new { display: flex; align-items: center; gap: 15px; }
         .trust-item { display: flex; align-items: center; gap: 8px; }
@@ -773,17 +822,25 @@
 
     <!-- WhatsApp Floating Widget -->
     <div class="whatsapp-widget-container">
-        <div class="whatsapp-banner" id="whatsappBanner">
-            <button type="button" id="closeWhatsappBanner" class="whatsapp-banner-close" aria-label="Close WhatsApp banner">&times;</button>
-            <p class="mb-0">"Mau Order? Hubungi <br>Admin Sahabatku Sekarang!"</p>
-        </div>
-        <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="whatsapp-button-wrapper" target="_blank" rel="noopener">
-            <div class="whatsapp-icon-inner">
-                <i class="fab fa-whatsapp"></i>
+        <a href="index.html" class="back-widget-button" title="Kembali">
+            <div class="back-widget-icon">
+                <i class="fas fa-arrow-left"></i>
             </div>
         </a>
+    
+        <div class="whatsapp-bottom-row">
+            <div class="whatsapp-banner" id="whatsappBanner">
+                <button type="button" id="closeWhatsappBanner" class="whatsapp-banner-close" aria-label="Close WhatsApp banner">&times;</button>
+                <p class="mb-0">"Mau Order? Hubungi <br>Admin Sahabatku Sekarang!"</p>
+            </div>
+            
+            <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="whatsapp-button-wrapper" target="_blank" rel="noopener">
+                <div class="whatsapp-icon-inner">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </a>
+        </div>
     </div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
@@ -800,7 +857,6 @@
                     <li class="nav-item"><a class="nav-link" href="#timeline">Sejarah</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tim">Tim</a></li>
                     <li class="nav-item"><a class="nav-link" href="#nilai">Nilai</a></li>
-                    <li class="nav-item ms-lg-3"><a class="nav-link btn-back-nav" href="index.html"><i class="fas fa-home me-1"></i> Kembali</a></li>
                     <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
                         <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20Order!" class="btn btn-primary px-4 py-2 rounded-pill fw-bold" target="_blank" rel="noopener">
                             <i class="fab fa-whatsapp me-1"></i>Pesan Sekarang!
