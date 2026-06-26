@@ -98,28 +98,6 @@
             letter-spacing: 0.5px; text-transform: uppercase;
         }
 
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            display: flex; justify-content: center; align-items: center; z-index: 10000;
-            transition: opacity 0.5s ease-out, visibility 0.5s;
-        }
-        .loading-content { display: flex; flex-direction: column; align-items: center; gap: 25px; }
-        .loading-logo-img {
-            width: 150px; height: auto; object-fit: contain; animation: pulseLogo 2s infinite ease-in-out;
-        }
-        .loading-spinner {
-            width: 45px; height: 45px; border: 3px solid rgba(0, 202, 255, 0.1);
-            border-top: 3px solid var(--success); border-radius: 50%; animation: spinSpinner 1s linear infinite;
-        }
-        @keyframes spinSpinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes pulseLogo {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-        .loading-hidden { opacity: 0; visibility: hidden; }
-
         /* WhatsApp Widget */
         .whatsapp-widget-container {
             position: fixed; bottom: 25px; right: 20px; display: flex; align-items: center; gap: 10px; z-index: 9999;
@@ -808,19 +786,138 @@
         .btn-back-nav i {
             font-size: 0.9rem;
         }
+        .team-section {
+            padding: 4rem 0;
+        }
+
+        .org-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+        }
+
+        .node-card-premium {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 202, 255, 0.2);
+            padding: 18px 22px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            width: 100%;
+            max-width: 320px;
+            transition: all 0.3s ease;
+        }
+
+        .node-card-premium:hover {
+            transform: translateY(-6px);
+            border-color: #00CAFF;
+            box-shadow: 0 20px 40px rgba(0, 202, 255, 0.15);
+        }
+
+        .founder-card {
+            max-width: 360px;
+        }
+
+        .team-person {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .team-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .team-info {
+            text-align: left;
+        }
+
+        .team-info-center {
+            text-align: center;
+        }
+
+        .path-line {
+            width: 2px;
+            height: 34px;
+            background: linear-gradient(to bottom, #00CAFF, transparent);
+        }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .role-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: rgba(0, 202, 255, 0.1);
+            color: #00CAFF;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .bottom-card {
+            max-width: 340px;
+        }
+
+        @media (max-width: 991px) {
+            .management-grid {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+            }
+
+            .node-card-premium {
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-section {
+                padding: 3rem 0;
+            }
+
+            .org-container {
+                gap: 12px;
+            }
+
+            .path-line {
+                height: 24px;
+            }
+
+            .node-card-premium {
+                padding: 16px 18px;
+            }
+
+            .team-person {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .team-info {
+                text-align: center;
+            }
+        }
+
     </style>
 </head>
 <body>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <img src="https://i.ibb.co.com/fGNHxPc5/logo-sahabatku.png" alt="Logo Sahabatku Group" class="loading-logo-img">
-            <div class="loading-spinner"></div>
-        </div>
-    </div>
-
-    <!-- WhatsApp Floating Widget -->
     <div class="whatsapp-widget-container">
         <a href="index.html" class="back-widget-button" title="Kembali">
             <div class="back-widget-icon">
@@ -875,7 +972,7 @@
                     <h1 class="display-3 fw-bold mb-4 text-white" data-aos="fade-up" data-aos-duration="1200">
                         Sahabatku Group
                     </h1>
-                    <div class="trust-badges-new mb-5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="trust-badges-new mb-5 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="trust-item">
                             <div class="trust-icon-mini bg-warning"><i class="fas fa-medal"></i></div>
                             <span>Terbaik Lokal</span>
@@ -992,13 +1089,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-wrap gap-3">
+                    <div class="d-flex flex-nowrap justify-content-center gap-2">
                         <a href="https://wa.me/628211845415?text=Halo%20Sahabatku,%20saya%20ingin%20kerjasama!" 
-                           class="btn btn-primary btn-lg px-5 py-3 fw-bold rounded-pill" target="_blank">
-                            <i class="fab fa-whatsapp me-2"></i>Kerjasama Bisnis
+                          class="btn btn-primary btn-sm px-3 py-2 fw-bold rounded-pill">
+                            Kerjasama Bisnis
                         </a>
-                        <a href="#timeline" class="btn btn-outline-primary btn-lg px-5 py-3 fw-bold rounded-pill">
-                            <i class="fas fa-clock me-2"></i>Lihat Sejarah
+                        <span class="align-self-center text-muted fw-bold">|</span>
+                        <a href="#timeline" class="btn btn-outline-primary btn-sm px-3 py-2 fw-bold rounded-pill">
+                            Lihat Sejarah
                         </a>
                     </div>
                 </div>
@@ -1094,72 +1192,70 @@
             <div class="text-center mb-5" data-aos="fade-up">
                 <span class="badge bg-white text-primary shadow-sm px-3 py-2 mb-3 rounded-pill">Core Team</span>
                 <h2 class="display-5 fw-bold">Struktur <span class="text-gradient">Manajemen</span></h2>
+                <p class="text-muted mb-0">Susunan tim Sahabatku Group</p>
             </div>
-    
+
             <div class="org-container">
-                <!-- TOP LEVEL: FOUNDER -->
-                <div class="node-card-premium" data-aos="zoom-in">
+                <div class="node-card-premium founder-card" data-aos="zoom-in">
                     <span class="role-badge">Chief Executive</span>
-                    <div class="d-flex align-items-center justify-content-center gap-3">
-                        <div class="bg-primary text-white rounded-circle p-2" style="width: 40px; height: 40px;">
+                    <div class="team-person">
+                        <div class="team-avatar bg-primary text-white">
                             <i class="fas fa-user-tie"></i>
                         </div>
-                        <div class="text-start">
-                            <h6 class="fw-bold mb-0">Founder Sahabatku</h6>
+                        <div class="team-info">
+                            <h6 class="fw-bold mb-1">Founder Sahabatku</h6>
                             <p class="small text-muted mb-0">Owner & Visionary</p>
                         </div>
                     </div>
                 </div>
-    
-                <!-- Connector -->
+
                 <div class="path-line" data-aos="fade-down"></div>
-    
-                <!-- MIDDLE LEVEL: MANAGEMENT -->
+
                 <div class="management-grid">
-                    
-                    <!-- General Manager -->
-                    <div class="node-card-premium" data-aos="fade-right" data-aos-delay="100">
+                    <div class="node-card-premium" data-aos="fade-up" data-aos-delay="100">
                         <span class="role-badge">Operations</span>
-                        <h6 class="fw-bold mb-0">Yayat</h6>
-                        <p class="small text-muted mb-2">General Manager</p>
-                        <div class="progress" style="height: 4px;">
-                            <div class="progress-bar bg-primary" style="width: 100%"></div>
+                        <div class="team-info-center">
+                            <h6 class="fw-bold mb-1">Yayat</h6>
+                            <p class="small text-muted mb-2">General Manager</p>
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar bg-primary" style="width: 100%"></div>
+                            </div>
                         </div>
                     </div>
-    
-                    <!-- HRD -->
+
                     <div class="node-card-premium" data-aos="fade-up" data-aos-delay="200">
                         <span class="role-badge">Human Resources</span>
-                        <h6 class="fw-bold mb-0">Sofyan</h6>
-                        <p class="small text-muted mb-2">HRD & Team Leader</p>
-                        <div class="progress" style="height: 4px;">
-                            <div class="progress-bar bg-info" style="width: 100%"></div>
+                        <div class="team-info-center">
+                            <h6 class="fw-bold mb-1">Sofyan</h6>
+                            <p class="small text-muted mb-2">HRD & Team Leader</p>
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar bg-info" style="width: 100%"></div>
+                            </div>
                         </div>
                     </div>
-    
-                    <!-- Coordinator -->
-                    <div class="node-card-premium" data-aos="fade-left" data-aos-delay="300">
+
+                    <div class="node-card-premium" data-aos="fade-up" data-aos-delay="300">
                         <span class="role-badge">Field Officer</span>
-                        <h6 class="fw-bold mb-0">Pangestu</h6>
-                        <p class="small text-muted mb-2">Coordinator</p>
-                        <div class="progress" style="height: 4px;">
-                            <div class="progress-bar bg-warning" style="width: 100%"></div>
+                        <div class="team-info-center">
+                            <h6 class="fw-bold mb-1">Pangestu</h6>
+                            <p class="small text-muted mb-2">Coordinator</p>
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar bg-warning" style="width: 100%"></div>
+                            </div>
                         </div>
                     </div>
-    
                 </div>
-    
-                <!-- Connector to Bottom -->
+
                 <div class="path-line" data-aos="fade-down"></div>
-    
-                <!-- BOTTOM LEVEL: PARTNERS -->
-                <div class="node-card-premium bg-gradient text-white border-0" data-aos="zoom-in" style="background: var(--gradient);">
+
+                <div class="node-card-premium bottom-card bg-gradient text-white border-0" data-aos="zoom-in" style="background: var(--gradient);">
                     <h6 class="fw-bold mb-1"><i class="fas fa-users me-2"></i>30+ Driver</h6>
                     <p class="small mb-0 opacity-75">Jatibarang, Indramayu & Sekitarnya</p>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Core Values Section -->
     <section class="values-section py-5" id="nilai" style="background: #f8fafc;">
@@ -1393,14 +1489,6 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <script>
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loading = document.getElementById('loadingScreen');
-                loading.classList.add('loading-hidden');
-            }, 2000);
-        });
-
         // AOS Animation
         AOS.init({ 
             duration: 1000, 
@@ -1482,7 +1570,6 @@
             }
         });
 
-        // Preload critical resources
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
