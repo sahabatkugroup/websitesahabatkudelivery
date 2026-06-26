@@ -1175,8 +1175,6 @@
                 992: { slidesPerView: 3, spaceBetween: 30 }
             }
         });
-
-        // Firebase Real-time Testimonials
         const firebaseConfig = {
             apiKey: "AIzaSyCtva8TeL40-WotK4kFL_vL8uUXL3GDfww",
             authDomain: "sahabatkuu-bisa.firebaseapp.com",
@@ -1194,13 +1192,10 @@
             let data = [], html = '';
             snapshot.forEach(child => {
                 const t = child.val();
-                if (t && t.isPublished && t.comments) {
-                    data.push(t);
-                }
+                if (t && t.isPublished && t.comments) data.push(t);
             });
-            
-            // 8 testimoni terbaru
-            data.slice(-8).reverse().forEach(t => {
+
+            data.slice(-20).reverse().forEach(t => {
                 const initial = t.fullname ? t.fullname.charAt(0).toUpperCase() : 'S';
                 html += `
                     <div class="swiper-slide">
@@ -1233,7 +1228,6 @@
             `;
             swiper.update();
         }).catch(() => {
-            // Fallback content
             document.getElementById('firebase-content').innerHTML = `
                 <div class="swiper-slide">
                     <div class="testimonial-card p-5 text-center">
