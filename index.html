@@ -1176,80 +1176,95 @@
             }
         });
         const firebaseConfig = {
-            apiKey: "AIzaSyCtva8TeL40-WotK4kFL_vL8uUXL3GDfww",
-            authDomain: "sahabatkuu-bisa.firebaseapp.com",
-            databaseURL: "https://sahabatkuu-bisa-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "sahabatkuu-bisa",
-            storageBucket: "sahabatkuu-bisa.firebasestorage.app",
-            messagingSenderId: "315555564115",
-            appId: "1:315555564115:web:56f46dbceb8c154589d4a6"
+          apiKey: "AIzaSyDweL8xXcOu6ZODYzCa1KpqZVPLH5Ocijk",
+          authDomain: "aplikasi-sahabatkugroup.firebaseapp.com",
+          databaseURL: "https://aplikasi-sahabatkugroup-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "aplikasi-sahabatkugroup",
+          storageBucket: "aplikasi-sahabatkugroup.firebasestorage.app",
+          messagingSenderId: "323288632862",
+          appId: "1:323288632862:web:57f12fbb5b18ad0fbd680f",
+          measurementId: "G-788RL05MFR"
         };
 
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-
-        database.ref('testimoni').once('value').then(snapshot => {
+        database.ref('testimonials').once('value').then(snapshot => {
             let data = [], html = '';
             snapshot.forEach(child => {
                 const t = child.val();
-                if (t && t.isPublished && t.comments) data.push(t);
+                // Filter: hanya ambil yang isPublished = true
+                if (t && t.isPublished === true && t.comments) {
+                    data.push(t);
+                }
             });
 
-            data.slice(-20).reverse().forEach(t => {
+            // Urutkan dari terbaru (reverse array)
+            data.reverse().forEach(t => {
                 const initial = t.fullname ? t.fullname.charAt(0).toUpperCase() : 'S';
+                const rating = parseInt(t.rating) || 5;
+                
+                // Buat bintang sesuai rating
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += `<i class="fas fa-star ${i <= rating ? 'text-warning' : 'text-secondary'}"></i>`;
+                }
+                
                 html += `
                     <div class="swiper-slide">
                         <div class="testimonial-card">
-                            <div>
-                                <div class="stars mb-4">${'<i class="fas fa-star text-warning"></i>'.repeat(Math.floor(t.rating || 5))}</div>
-                                <p class="fw-semibold fs-6 lh-lg mb-4">"${t.comments}"</p>
-                            </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
                                 <div style="width:48px;height:48px;background:var(--gradient);color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;flex-shrink:0;box-shadow:var(--shadow-sm);">${initial}</div>
-                                <div class="ms-3">
+                                <div class="flex-grow-1">
                                     <h6 class="mb-1 fw-bold">${t.fullname || 'Pelanggan'}</h6>
-                                    <small class="text-primary fw-semibold">Pelanggan Setia</small>
+                                    <small class="text-primary fw-semibold d-block"><i class="fas fa-motorcycle me-1"></i>${t.nama || 'Driver'}</small>
                                 </div>
                             </div>
+                            <div>
+                                <p class="fw-semibold fs-6 lh-lg mb-4">"${t.comments}"</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between gap-2 pt-3 border-top">
+                                <div class="stars">${stars}</div>
+                                <small class="text-muted d-flex align-items-center gap-2">
+                                    <span class="badge bg-light text-dark">${t.attitude || '-'}</span>
+                                    <span class="badge bg-light text-dark">${t.speed || '-'}</span>
+                                </small>
+                            </div>
                         </div>
-                    </div>`;
+                    </div>
+                `;
             });
 
             const content = document.getElementById('firebase-content');
-            content.innerHTML = html || `
-                <div class="swiper-slide">
-                    <div class="testimonial-card p-5 text-center">
-                        <i class="fas fa-heart fa-2x text-primary mb-4 d-block"></i>
-                        <h5 class="text-primary fw-bold mb-3">Pelanggan Sangat Puas!</h5>
-                        <p class="text-muted lead">"Layanan tercepat dan terpercaya di Jatibarang. Recommended!"</p>
-                        <div class="stars mt-3">${'<i class="fas fa-star text-warning"></i>'.repeat(5)}</div>
+            
+            if (html.trim() === '') {
+                // Fallback jika tidak ada testimoni
+                html = `
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-5 text-center">
+                            <i class="fas fa-heart fa-2x text-primary mb-4 d-block"></i>
+                            <h5 class="text-primary fw-bold mb-3">Pelanggan Sangat Puas!</h5>
+                            <p class="text-muted lead">"Layanan tercepat dan terpercaya di Jatibarang. Recommended!"</p>
+                            <div class="stars mt-3">${'<i class="fas fa-star text-warning"></i>'.repeat(5)}</div>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
+            
+            content.innerHTML = html;
             swiper.update();
-        }).catch(() => {
+        }).catch((error) => {
+            console.error('Error loading testimonials:', error);
             document.getElementById('firebase-content').innerHTML = `
                 <div class="swiper-slide">
                     <div class="testimonial-card p-5 text-center">
                         <i class="fas fa-comments fa-2x text-primary mb-4"></i>
                         <h5 class="text-primary fw-bold mb-3">Pelanggan Puas!</h5>
                         <p class="text-muted">"Pelayanan profesional dan ramah. Sangat direkomendasikan!"</p>
+                        <div class="stars mt-3">${'<i class="fas fa-star text-warning"></i>'.repeat(5)}</div>
                     </div>
-                </div>`;
+                </div>
+            `;
         });
-
-        // Preload critical resources
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        AOS.refresh();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-            observer.observe(document.querySelector('#layanan'));
-        }
         window.addEventListener("load", function() {
             const loader = document.getElementById("loadingScreen");
             // Memberikan jeda sedikit agar transisi terlihat smooth
