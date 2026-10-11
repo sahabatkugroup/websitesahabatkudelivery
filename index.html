@@ -2,13 +2,13 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Sahabatku Delivery - Jasa Terpercaya Jatibarang</title>
 <meta name="description" content="Sahabatku Delivery - Jasa terpercaya #1 Jatibarang. Food delivery, ojek, kirim barang, titip belanja, bayar tagihan dan lainnya via WhatsApp.">
 <meta name="theme-color" content="#0081F5">
 
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<link rel="preconnect" href="https://i.ibb.co.com" crossorigin>
+<link rel="preconnect" href="https://wsrv.nl" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -136,6 +136,7 @@ body.ready .hr{opacity:1;transform:none}
 .trust-i{display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:600;color:rgba(255,255,255,.92)}
 .trust-i span{width:32px;height:32px;border-radius:10px;background:rgba(0,129,245,.25);border:1px solid rgba(109,184,255,.35);display:flex;align-items:center;justify-content:center;color:#8CC8FF;font-size:.8rem}
 .trust-sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+@media(min-width:576px){.trust{flex-wrap:nowrap;justify-content:space-between;gap:12px}}
 @media(max-width:575px){.trust-sep{display:none}.trust{gap:12px 18px}.trust-i{font-size:.84rem}}
 .hv{position:relative;max-width:480px;margin-left:auto}
 .hv-frame{border-radius:28px 28px 120px 28px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 90px -20px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.14)}
@@ -413,6 +414,28 @@ img{image-rendering:auto;-webkit-user-drag:none}
 }
 @media(max-width:575px){#toTop{right:22px;bottom:78px;width:38px;height:38px}}
 
+/* ===== Poster popup (rasio 4:5 = 3240 x 4050) ===== */
+#promo{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(11,18,32,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+#promo.open{opacity:1;visibility:visible}
+.promo-box{position:relative;width:min(92vw,520px,calc((100vh - 48px) * .8));aspect-ratio:4/5;opacity:0;transform:translateY(26px) scale(.94);transition:opacity .6s var(--ease) .08s,transform .7s var(--ease) .08s}
+@supports(height:100dvh){.promo-box{width:min(92vw,520px,calc((100dvh - 48px) * .8))}}
+#promo.open .promo-box{opacity:1;transform:none}
+.promo-swiper{width:100%;height:100%;border-radius:22px;overflow:hidden;background:var(--dark);box-shadow:0 40px 90px -20px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.12)}
+.promo-swiper .swiper-slide{width:100%;height:100%}
+.promo-swiper .swiper-slide a,.promo-swiper .swiper-slide img{display:block;width:100%;height:100%}
+.promo-swiper .swiper-slide img{object-fit:cover;-webkit-user-select:none;user-select:none}
+.promo-swiper .swiper-pagination{bottom:14px!important}
+.promo-swiper .swiper-pagination-bullet{background:#fff;opacity:.55;width:8px;height:8px;box-shadow:0 1px 6px rgba(0,0,0,.45)}
+.promo-swiper .swiper-pagination-bullet-active{opacity:1;width:26px;background:#fff}
+.promo-close{position:absolute;top:-12px;right:-12px;z-index:5;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:var(--dark);font-size:1.05rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 26px -6px rgba(0,0,0,.5);transition:transform .35s var(--ease),background .3s,color .3s}
+.promo-close:hover{background:var(--primary);color:#fff;transform:rotate(90deg)}
+.promo-arrow{position:absolute;top:50%;z-index:4;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--dark);font-size:.9rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 20px -6px rgba(0,0,0,.45);transition:transform .3s var(--ease),background .3s,color .3s}
+.promo-arrow:hover{background:var(--primary);color:#fff}
+.promo-prev{left:-14px}.promo-next{right:-14px}
+.promo-prev:hover{transform:translateX(-2px)}.promo-next:hover{transform:translateX(2px)}
+.promo-box.single .promo-arrow,.promo-box.single .swiper-pagination{display:none}
+@media(max-width:575px){.promo-arrow{width:34px;height:34px;margin-top:-17px;font-size:.78rem}.promo-prev{left:-10px}.promo-next{right:-10px}.promo-close{top:-10px;right:-8px;width:40px;height:40px}}
+
 /* ===== Responsive ===== */
 @media(max-width:1199px){.svc-grid{grid-template-columns:repeat(3,1fr)}.svc-wide{grid-column:span 3}}
 @media(max-width:991px){
@@ -455,6 +478,109 @@ img{image-rendering:auto;-webkit-user-drag:none}
   .svc{padding:20px 14px 18px}
   .svc p{font-size:.8rem;margin-bottom:14px}
 }
+/* ===== Rapikan tampilan HP (semua ukuran layar) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip}
+body{overflow-x:clip;max-width:100%}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.navbar-collapse{max-height:calc(100vh - 96px);overflow-y:auto}
+.wa{right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+@media(max-width:767px){
+  /* ringan: matikan efek berat di HP */
+  .rv{filter:none}
+  .hero-bg,.stats::before,.cta::before,.cta::after,.vm-vision::after{animation:none}
+  .orb{filter:blur(56px)}
+  .orb-1 .orb{width:300px;height:300px}.orb-2 .orb{width:280px;height:280px}.orb-3,#dots,.hero-noise{display:none}
+  .hero-wave svg{height:40px}
+  .tl-item.in,.tl-item.r.in{transform:none}
+  .rv-l,.rv-r{transform:translateY(24px)}
+  .rv.in{transform:none}
+}
+@media(max-width:575px){
+  .container{--bs-gutter-x:2rem}
+  .row.g-5,.row.gx-xl-5{--bs-gutter-x:2rem}
+  .brand-logo{width:38px;height:38px}
+  .brand-text{font-size:1rem}
+  .toggler{padding:8px 10px;font-size:1.4rem}
+  .sec-head{margin-bottom:28px}
+  .sec-title{font-size:clamp(1.65rem,7.4vw,2.1rem);margin-bottom:12px}
+  .sec-lead{font-size:.98rem}
+  .eyebrow{font-size:.72rem;margin-bottom:12px}
+  /* hero */
+  .hero{padding:104px 0 84px}
+  .hero-pill{font-size:.74rem;padding:7px 14px 7px 8px;margin-bottom:20px}
+  .hero h1{font-size:clamp(1.85rem,8.4vw,2.5rem);margin-bottom:18px;line-height:1.12}
+  .hero-sub{font-size:.98rem;margin-bottom:26px}
+  .hero-cta{gap:10px;margin-bottom:28px}
+  .hv{margin:30px auto 0;max-width:100%}
+  .hv-frame{aspect-ratio:4/3.4;border-radius:22px 22px 70px 22px}
+  body.ready .hv-frame.img-reveal{clip-path:inset(0 0 0 0 round 22px 22px 70px 22px)}
+  .hv-frame.img-reveal{clip-path:inset(0 0 100% 0 round 22px 22px 70px 22px)}
+  /* layanan */
+  .svc-grid{gap:12px}
+  .svc{padding:18px 14px 16px;border-radius:18px}
+  .svc-ico{width:48px;height:48px;font-size:1.2rem;margin-bottom:14px;border-radius:14px}
+  .svc h3{font-size:.95rem;margin-bottom:6px;overflow-wrap:anywhere}
+  .svc p{font-size:.78rem;line-height:1.5;margin-bottom:12px}
+  .svc-cta{font-size:.82rem}
+  /* statistik, visi misi */
+  .stats{padding:44px 0}
+  .stat{padding:14px 6px}
+  .stat .num{font-size:clamp(2.1rem,10vw,2.8rem)}
+  .stat .lbl{font-size:.68rem;letter-spacing:.08em;margin-top:8px}
+  .vm-vision{padding:28px 22px;border-radius:22px}
+  .vm-vision p{font-size:1.05rem}
+  .mis{gap:14px;padding:13px 0}
+  .mis span{font-size:.95rem}
+  .mis .n{width:36px;height:36px}
+  /* perjalanan, struktur, nilai */
+  .tl-card{padding:18px 18px}
+  .tl-date{font-size:1rem}
+  .org-card{max-width:100%;padding:18px 20px}
+  .val{padding:26px 22px}
+  .val .ic{width:62px;height:62px;font-size:1.45rem;margin-bottom:18px}
+  /* karier */
+  .career-box{padding:28px 20px;border-radius:22px}
+  .career-box .sec-title{font-size:clamp(1.55rem,7vw,2rem)}
+  .career-cta{margin:22px 0}
+  .benefits{gap:10px}
+  .ben{padding:14px 6px;font-size:.8rem;border-radius:16px}
+  .ben i{width:36px;height:36px}
+  /* testimoni, sponsor */
+  .tcard{padding:22px 18px}
+  .tcard blockquote{font-size:.95rem}
+  .t-arrow{width:46px;height:46px}
+  .testi-nav{gap:12px}
+  .partners{padding:44px 0}
+  .sp-card{padding:20px 16px;border-radius:20px}
+  /* cta, kontak, footer */
+  .cta{padding:52px 0}
+  .cta h2{font-size:clamp(1.55rem,7.2vw,2.1rem)}
+  .cta p{font-size:1rem;margin-bottom:26px}
+  .contact-wrap{border-radius:20px}
+  .contact-info{padding:24px 20px}
+  .c-row{gap:12px;margin-bottom:18px}
+  .c-row .v{overflow-wrap:anywhere}
+  .contact-map,.contact-map iframe{min-height:280px}
+  .footer{padding-top:48px}
+  .footer .row{--bs-gutter-y:1.75rem}
+  .f-bottom{margin-top:36px;font-size:.8rem}
+  .f-contact{overflow-wrap:anywhere}
+  #toTop{right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  .wa{right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+}
+@media(max-width:360px){
+  .container{--bs-gutter-x:1.5rem}
+  .row.g-5,.row.gx-xl-5{--bs-gutter-x:1.5rem}
+  .btn-x{padding:13px 16px;font-size:.9rem;white-space:normal;text-align:center}
+  .hero h1{font-size:1.75rem}
+  .trust-i{font-size:.8rem}.trust-i span{width:32px;height:32px}
+  .svc-grid{gap:10px}
+  .svc{padding:16px 12px 14px}
+  .svc p{font-size:.74rem}
+  .stat .lbl{font-size:.62rem}
+  .ben{font-size:.74rem}
+}
+
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:8px}
@@ -493,11 +619,24 @@ img{image-rendering:auto;-webkit-user-drag:none}
 
 <button type="button" id="toTop" aria-label="Kembali ke atas"><i class="fas fa-chevron-up"></i></button>
 
+<!-- Poster popup -->
+<div id="promo" role="dialog" aria-modal="true" aria-label="Poster informasi Sahabatku Delivery" aria-hidden="true">
+  <div class="promo-box" id="promoBox">
+    <button type="button" class="promo-close" id="promoClose" aria-label="Tutup poster"><i class="fas fa-xmark"></i></button>
+    <button type="button" class="promo-arrow promo-prev" id="promoPrev" aria-label="Poster sebelumnya"><i class="fas fa-chevron-left"></i></button>
+    <button type="button" class="promo-arrow promo-next" id="promoNext" aria-label="Poster berikutnya"><i class="fas fa-chevron-right"></i></button>
+    <div class="swiper promo-swiper" id="promoSwiper">
+      <div class="swiper-wrapper" id="promoWrap"></div>
+      <div class="swiper-pagination" id="promoDots"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
   <div class="container">
     <a class="brand" href="#home">
-      <img src="https://i.ibb.co.com/p6tPmVF6/Logo-Sahabatku-20261011-232730-0000.png/fGNHxPc5/logo-sahabatku.png" alt="Sahabatku Delivery" class="brand-logo">
+      <img src="https://i.ibb.co.com/p6tPmVF6/Logo-Sahabatku-20261011-232730-0000.png" alt="Sahabatku Delivery" class="brand-logo">
       <span class="brand-text">SAHABATKU<small>DELIVERY</small></span>
     </a>
     <button class="toggler navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Menu">
@@ -557,7 +696,7 @@ img{image-rendering:auto;-webkit-user-drag:none}
           </a>
           <a href="#tentang" class="btn-x btn-ghost">Kenali Kami<i class="fas fa-arrow-right arrow"></i></a>
         </div>
-        <div class="trust hr" style="--d:.95s; display: flex; align-items: center; justify-content: space-around; flex-wrap: nowrap;">
+        <div class="trust hr" style="--d:.95s">
           <div class="trust-i"><span><i class="fas fa-medal"></i></span>Terbaik Lokal</div>
           <div class="trust-sep"></div>
           <div class="trust-i"><span><i class="fas fa-tags"></i></span>Harga Terjangkau</div>
@@ -569,7 +708,7 @@ img{image-rendering:auto;-webkit-user-drag:none}
       <div class="col-lg-5">
         <div class="hv" data-parallax="-0.05">
           <div class="hv-frame img-reveal">
-            <img src="https://i.ibb.co.com/QvbH8dSq/Whats-App-Image-2026-10-11-at-23-52-51.jpg" alt="Tim Sahabatku Delivery">
+            <img src="https://i.ibb.co.com/QvbH8dSq/Whats-App-Image-2026-10-11-at-23-52-51.jpg" alt="Tim Sahabatku Delivery" fetchpriority="high" decoding="async">
           </div>
         </div>
       </div>
@@ -914,7 +1053,7 @@ img{image-rendering:auto;-webkit-user-drag:none}
     <div class="row g-5">
       <div class="col-lg-4">
         <div class="f-brand">
-          <img src="https://i.ibb.co.com/nTWSVmr/Whats-App-Image-2026-10-11-at-23-52-54-1.jpg/fGNHxPc5/logo-sahabatku.png" alt="Sahabatku Delivery">
+          <img src="https://i.ibb.co.com/p6tPmVF6/Logo-Sahabatku-20261011-232730-0000.png" alt="Sahabatku Delivery">
           <div><b>SAHABATKU</b><small>DELIVERY</small></div>
         </div>
         <p style="font-size:.93rem;max-width:340px">Jasa terpercaya #1 Jatibarang. Order mudah via WhatsApp dengan pelayanan terbaik.</p>
@@ -960,6 +1099,8 @@ img{image-rendering:auto;-webkit-user-drag:none}
   </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -978,6 +1119,7 @@ img{image-rendering:auto;-webkit-user-drag:none}
     loader.classList.add('hide');
     document.body.classList.add('ready');
     setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 800);
+    setTimeout(openPromo, reduce ? 150 : 1100);
   }
   var minWait = new Promise(function (r) { setTimeout(r, reduce ? 50 : 850); });
   var pageLoaded = new Promise(function (r) {
@@ -985,6 +1127,88 @@ img{image-rendering:auto;-webkit-user-drag:none}
   });
   Promise.all([minWait, pageLoaded]).then(hideLoader);
   setTimeout(hideLoader, 3500);
+
+  /* ---------- Gambar cepat (dikecilkan & dijadikan WebP lewat CDN gambar) ---------- */
+  var USE_IMG_CDN = true; // ubah ke false untuk memakai tautan gambar asli
+  function fastImg(url, w) {
+    if (!USE_IMG_CDN || !url || url.indexOf('i.ibb.co') === -1) return url;
+    return 'https://wsrv.nl/?url=' + encodeURIComponent(url) + '&w=' + w + '&q=80&output=webp&we';
+  }
+  $$('img[loading="lazy"]').forEach(function (im) {
+    var o = im.getAttribute('src');
+    if (!o || o.indexOf('i.ibb.co') === -1) return;
+    var w = im.closest('.about-slider') ? 1000 : (im.closest('.sp-logo') ? 600 : 900);
+    im.decoding = 'async';
+    im.addEventListener('error', function fb() { im.removeEventListener('error', fb); im.src = o; });
+    im.src = fastImg(o, w);
+  });
+
+  /* ---------- Poster popup ---------- */
+  // ISI POSTER DI SINI: satu baris = satu poster (rasio 4:5, ideal 3240 x 4050 px).
+  // href (opsional) = tautan saat poster diklik, boleh dikosongkan ('').
+  var POSTERS = [
+    { src: 'https://i.ibb.co.com/C3nPFGy9/Whats-App-Image-2026-10-12-at-00-15-09.jpg', alt: 'Poster Sahabatku Delivery 1', href: '' },
+    { src: 'https://i.ibb.co.com/k6Wxx5vg/Whats-App-Image-2026-10-12-at-00-15-10.jpg', alt: 'Poster Sahabatku Delivery 2', href: '' },
+    { src: 'https://i.ibb.co.com/Y7YY9GkB/Whats-App-Image-2026-10-12-at-00-15-14.jpg', alt: 'Poster Sahabatku Delivery 3', href: '' },
+    { src: 'https://i.ibb.co.com/GQKKCj7Y/Whats-App-Image-2026-10-12-at-00-15-19.jpg', alt: 'Poster Sahabatku Delivery 4', href: '' }
+    
+  ];
+  var promo = $('#promo'), promoBox = $('#promoBox'), promoWrap = $('#promoWrap'), promoSwiper = null, promoOpen = false, promoLastFocus = null;
+  function closePromo() {
+    if (!promoOpen) return; promoOpen = false;
+    promo.classList.remove('open'); promo.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (promoSwiper && promoSwiper.autoplay) promoSwiper.autoplay.stop();
+    if (promoLastFocus && promoLastFocus.focus) { try { promoLastFocus.focus(); } catch (e) {} }
+  }
+  function openPromo() {
+    if (promoOpen || !promo || !POSTERS.length) return;
+    promoWrap.innerHTML = POSTERS.map(function (p) {
+      var im = '<img src="' + esc(fastImg(p.src, 1080)) + '" data-o="' + esc(p.src) + '" alt="' + esc(p.alt || 'Poster') + '" draggable="false" decoding="async">';
+      var inner = p.href ? '<a href="' + esc(p.href) + '" target="_blank" rel="noopener">' + im + '</a>' : im;
+      return '<div class="swiper-slide">' + inner + '</div>';
+    }).join('');
+    var many = POSTERS.length > 1;
+    promoBox.classList.toggle('single', !many);
+    promoOpen = true; promoLastFocus = document.activeElement;
+    promo.classList.add('open'); promo.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (window.Swiper) {
+      promoSwiper = new Swiper('#promoSwiper', {
+        loop: many, speed: 750, grabCursor: many, allowTouchMove: many,
+        autoplay: (many && !reduce) ? { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true } : false,
+        pagination: { el: '#promoDots', clickable: true }
+      });
+      $('#promoPrev').onclick = function () { promoSwiper.slidePrev(); };
+      $('#promoNext').onclick = function () { promoSwiper.slideNext(); };
+    }
+    // poster yang gagal dimuat dibuang supaya tidak tampil kosong
+    $$('img', promoWrap).forEach(function (im) {
+      im.addEventListener('error', function () {
+        if (!im.getAttribute('data-fb') && im.getAttribute('data-o') && im.getAttribute('data-o') !== im.getAttribute('src')) { im.setAttribute('data-fb', '1'); im.src = im.getAttribute('data-o'); return; }
+        var sl = im.closest('.swiper-slide'); if (sl && sl.parentNode) sl.parentNode.removeChild(sl);
+        if (!$$('.swiper-slide', promoWrap).length) closePromo(); else if (promoSwiper) promoSwiper.update();
+      });
+    });
+    setTimeout(function () { var c = $('#promoClose'); if (c) c.focus({ preventScroll: true }); }, 400);
+  }
+  if (promo) {
+    $('#promoClose').addEventListener('click', closePromo);
+    promo.addEventListener('click', function (e) { if (e.target === promo) closePromo(); });
+    document.addEventListener('keydown', function (e) {
+      if (!promoOpen) return;
+      if (e.key === 'Escape') closePromo();
+      else if (e.key === 'ArrowLeft' && promoSwiper) promoSwiper.slidePrev();
+      else if (e.key === 'ArrowRight' && promoSwiper) promoSwiper.slideNext();
+    });
+    // muat poster pertama lebih awal supaya langsung tampil saat popup dibuka
+    if (POSTERS.length) { var pre = new Image(); pre.src = fastImg(POSTERS[0].src, 1080); }
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
 
   /* ---------- AOS ---------- */
   if (window.AOS) AOS.init({ duration: 850, easing: 'ease-out-cubic', once: true, offset: 60, disable: reduce });
@@ -1070,7 +1294,7 @@ img{image-rendering:auto;-webkit-user-drag:none}
     if (toTop) toTop.classList.toggle('show', y > 500);
     progress.style.transform = 'scaleX(' + (h > 0 ? Math.min(y / h, 1) : 0) + ')';
 
-    if (!reduce && y < vh * 1.3) {
+    if (!reduce && window.innerWidth >= 768 && y < vh * 1.3) {
       parallaxEls.forEach(function (el) {
         var sp = parseFloat(el.getAttribute('data-parallax')) || 0;
         el.style.transform = 'translate3d(0,' + (y * sp).toFixed(1) + 'px,0)';
@@ -1144,11 +1368,6 @@ img{image-rendering:auto;-webkit-user-drag:none}
 
   /* ---------- Testimonials (Firebase) ---------- */
   var testiWrap = $('#firebase-content'), testiSwiper = null;
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
   function getTime(t) {
     var f = ['timestamp', 'createdAt', 'created_at', 'datetime', 'date', 'tanggal', 'waktu', 'time'];
     for (var i = 0; i < f.length; i++) {
