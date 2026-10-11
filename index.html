@@ -8,7 +8,6 @@
 <meta name="theme-color" content="#0081F5">
 
 <link rel="preconnect" href="https://i.ibb.co.com" crossorigin>
-<link rel="preconnect" href="https://wsrv.nl" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -152,8 +151,8 @@ body.ready .hr{opacity:1;transform:none}
 .rv{opacity:0;transform:translateY(26px);filter:blur(8px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease);transition-delay:var(--d,0s)}
 .rv-l{transform:translateX(-36px)}.rv-r{transform:translateX(36px)}.rv-s{transform:scale(.92)}
 .rv.in{opacity:1;transform:none;filter:none}
-.img-reveal{clip-path:inset(0 0 100% 0 round 24px);transition:clip-path 1.3s var(--ease);transition-delay:var(--d,0s)}
-.img-reveal img,.img-reveal .swiper{transform:scale(1.25);transition:transform 1.8s var(--ease);transition-delay:var(--d,0s)}
+.img-reveal{clip-path:inset(0 0 100% 0 round 24px);transition:clip-path .9s var(--ease);transition-delay:var(--d,0s)}
+.img-reveal img,.img-reveal .swiper{transform:scale(1.15);transition:transform 1.2s var(--ease);transition-delay:var(--d,0s)}
 .img-reveal.in{clip-path:inset(0 0 0 0 round 24px)}
 .img-reveal.in img,.img-reveal.in .swiper{transform:scale(1)}
 body.ready .hv-frame.img-reveal{clip-path:inset(0 0 0 0 round 28px 28px 120px 28px)}
@@ -478,6 +477,11 @@ img{image-rendering:auto;-webkit-user-drag:none}
   .svc{padding:20px 14px 18px}
   .svc p{font-size:.8rem;margin-bottom:14px}
 }
+/* ===== Skeleton foto + baris keunggulan hero di HP ===== */
+.about-frame,.career-img,.hv-frame{background:linear-gradient(135deg,#EAF5FF,#F7FBFF)}
+.about-frame img,.career-img img,.hv-frame img{background:transparent}
+.about-frame .swiper-slide{background:transparent}
+
 /* ===== Rapikan tampilan HP (semua ukuran layar) ===== */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip}
 body{overflow-x:clip;max-width:100%}
@@ -511,6 +515,11 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   .hero h1{font-size:clamp(1.85rem,8.4vw,2.5rem);margin-bottom:18px;line-height:1.12}
   .hero-sub{font-size:.98rem;margin-bottom:26px}
   .hero-cta{gap:10px;margin-bottom:28px}
+  /* keunggulan hero: 3 kolom sejajar satu baris */
+  .trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;align-items:stretch}
+  .trust-sep{display:none}
+  .trust-i{flex-direction:column;justify-content:flex-start;text-align:center;gap:8px;font-size:.74rem;line-height:1.25;padding:12px 4px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.05)}
+  .trust-i span{width:34px;height:34px}
   .hv{margin:30px auto 0;max-width:100%}
   .hv-frame{aspect-ratio:4/3.4;border-radius:22px 22px 70px 22px}
   body.ready .hv-frame.img-reveal{clip-path:inset(0 0 0 0 round 22px 22px 70px 22px)}
@@ -573,7 +582,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   .row.g-5,.row.gx-xl-5{--bs-gutter-x:1.5rem}
   .btn-x{padding:13px 16px;font-size:.9rem;white-space:normal;text-align:center}
   .hero h1{font-size:1.75rem}
-  .trust-i{font-size:.8rem}.trust-i span{width:32px;height:32px}
+  .trust-i{font-size:.7rem;padding:10px 2px}.trust-i span{width:30px;height:30px}
   .svc-grid{gap:10px}
   .svc{padding:16px 12px 14px}
   .svc p{font-size:.74rem}
@@ -600,7 +609,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 <!-- Loader -->
 <div id="loader" aria-hidden="true">
   <div class="ld-box">
-    <img src="https://i.ibb.co.com/p6tPmVF6/Logo-Sahabatku-20261011-232730-0000.png" alt="Logo Sahabatku Delivery">
+    <img src="https://i.ibb.co.com/GvRr881Z/Logo-Sahabatku-20261012-003103-0000.png" alt="Logo Sahabatku Delivery">
     <div class="ld-bar"><span></span></div>
   </div>
 </div>
@@ -636,7 +645,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
   <div class="container">
     <a class="brand" href="#home">
-      <img src="https://i.ibb.co.com/p6tPmVF6/Logo-Sahabatku-20261011-232730-0000.png" alt="Sahabatku Delivery" class="brand-logo">
+      <img src="https://i.ibb.co.com/GvRr881Z/Logo-Sahabatku-20261012-003103-0000.png" alt="Sahabatku Delivery" class="brand-logo">
       <span class="brand-text">SAHABATKU<small>DELIVERY</small></span>
     </a>
     <button class="toggler navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Menu">
@@ -1053,7 +1062,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
     <div class="row g-5">
       <div class="col-lg-4">
         <div class="f-brand">
-          <img src="https://i.ibb.co.com/p6tPmVF6/Logo-Sahabatku-20261011-232730-0000.png" alt="Sahabatku Delivery">
+          <img src="https://i.ibb.co.com/GvRr881Z/Logo-Sahabatku-20261012-003103-0000.png" alt="Sahabatku Delivery">
           <div><b>SAHABATKU</b><small>DELIVERY</small></div>
         </div>
         <p style="font-size:.93rem;max-width:340px">Jasa terpercaya #1 Jatibarang. Order mudah via WhatsApp dengan pelayanan terbaik.</p>
@@ -1128,20 +1137,22 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   Promise.all([minWait, pageLoaded]).then(hideLoader);
   setTimeout(hideLoader, 3500);
 
-  /* ---------- Gambar cepat (dikecilkan & dijadikan WebP lewat CDN gambar) ---------- */
-  var USE_IMG_CDN = true; // ubah ke false untuk memakai tautan gambar asli
-  function fastImg(url, w) {
-    if (!USE_IMG_CDN || !url || url.indexOf('i.ibb.co') === -1) return url;
-    return 'https://wsrv.nl/?url=' + encodeURIComponent(url) + '&w=' + w + '&q=80&output=webp&we';
+  /* ---------- Muat foto lebih cepat ---------- */
+  // Foto di bawah layar dimuat setelah halaman utama selesai (tidak menghambat loading awal),
+  // berurutan: Karier -> slider Tentang Kami -> sponsor, supaya sudah siap sebelum di-scroll.
+  function warmImages() {
+    var imgs = $$('img[loading="lazy"]');
+    imgs.sort(function (a, b) {
+      var rank = function (el) { return el.closest('.career-img') ? 0 : (el.closest('.about-slider') ? 1 : 2); };
+      return rank(a) - rank(b);
+    });
+    imgs.forEach(function (im, i) {
+      setTimeout(function () { im.decoding = 'async'; im.loading = 'eager'; }, i * 120);
+    });
+    POSTERS.slice(1).forEach(function (p) { var x = new Image(); x.decoding = 'async'; x.src = p.src; });
   }
-  $$('img[loading="lazy"]').forEach(function (im) {
-    var o = im.getAttribute('src');
-    if (!o || o.indexOf('i.ibb.co') === -1) return;
-    var w = im.closest('.about-slider') ? 1000 : (im.closest('.sp-logo') ? 600 : 900);
-    im.decoding = 'async';
-    im.addEventListener('error', function fb() { im.removeEventListener('error', fb); im.src = o; });
-    im.src = fastImg(o, w);
-  });
+  if (document.readyState === 'complete') setTimeout(warmImages, 200);
+  else window.addEventListener('load', function () { setTimeout(warmImages, 200); });
 
   /* ---------- Poster popup ---------- */
   // ISI POSTER DI SINI: satu baris = satu poster (rasio 4:5, ideal 3240 x 4050 px).
@@ -1164,7 +1175,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   function openPromo() {
     if (promoOpen || !promo || !POSTERS.length) return;
     promoWrap.innerHTML = POSTERS.map(function (p) {
-      var im = '<img src="' + esc(fastImg(p.src, 1080)) + '" data-o="' + esc(p.src) + '" alt="' + esc(p.alt || 'Poster') + '" draggable="false" decoding="async">';
+      var im = '<img src="' + esc(p.src) + '" alt="' + esc(p.alt || 'Poster') + '" draggable="false" decoding="async">';
       var inner = p.href ? '<a href="' + esc(p.href) + '" target="_blank" rel="noopener">' + im + '</a>' : im;
       return '<div class="swiper-slide">' + inner + '</div>';
     }).join('');
@@ -1185,7 +1196,6 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
     // poster yang gagal dimuat dibuang supaya tidak tampil kosong
     $$('img', promoWrap).forEach(function (im) {
       im.addEventListener('error', function () {
-        if (!im.getAttribute('data-fb') && im.getAttribute('data-o') && im.getAttribute('data-o') !== im.getAttribute('src')) { im.setAttribute('data-fb', '1'); im.src = im.getAttribute('data-o'); return; }
         var sl = im.closest('.swiper-slide'); if (sl && sl.parentNode) sl.parentNode.removeChild(sl);
         if (!$$('.swiper-slide', promoWrap).length) closePromo(); else if (promoSwiper) promoSwiper.update();
       });
@@ -1202,7 +1212,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
       else if (e.key === 'ArrowRight' && promoSwiper) promoSwiper.slideNext();
     });
     // muat poster pertama lebih awal supaya langsung tampil saat popup dibuka
-    if (POSTERS.length) { var pre = new Image(); pre.src = fastImg(POSTERS[0].src, 1080); }
+    if (POSTERS.length) { var pre = new Image(); pre.src = POSTERS[0].src; }
   }
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -1233,7 +1243,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
     revealEls.forEach(function (el) { if (!el.closest('.hero')) io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('in'); });
